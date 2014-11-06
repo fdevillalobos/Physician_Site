@@ -19,6 +19,8 @@ gem 'less-rails'
 gem 'devise'          # User Management
 gem 'annotate'        # Puts the actual schema annotation in the model file
 
+gem 'figaro'
+
 gem 'rspec-rails'
 gem 'rails_layout'
 
