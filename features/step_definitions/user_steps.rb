@@ -25,7 +25,7 @@ Given(/^I have an existing user$/) do
   @user = User.create(:email => 'franciscodevillalobos@gmail.com', :password => @password, :password_confirmation => @password)
 end
 
-When(/^I fill sign in fields$/) do
+When(/^I fill sign in fields|I sign in with my credentials$/) do
   fill_in :user_email, :with => @user.email
   fill_in :user_password, :with => @password
   click_button 'Sign in'
@@ -81,4 +81,33 @@ end
 
 Then(/^I should be redirected to login page$/) do
   expect(current_path).to eq(new_user_session_path)
+end
+
+
+########################################################################################################################
+Given(/^I'm on the edit user webpage$/) do
+  visit edit_user_registration_path
+end
+
+When(/^I fill the new password fields$/) do
+  fill_in :password, :with => @password
+  fill_in :user_password_confirmation, :with => @password
+end
+
+When(/^I fill the current password field and update$/) do
+  @password = '56781234'
+  fill_in :user_current_password, :with => @password
+  click_button 'Update'
+end
+
+Then(/^I should see account successfully updated$/) do
+  pending # express the regexp above with the code you wish you had
+end
+
+When(/^I don't fill the current password field and update$/) do
+  click_button 'Update'
+end
+
+Then(/^I should see account not updated error$/) do
+  pending # express the regexp above with the code you wish you had
 end
