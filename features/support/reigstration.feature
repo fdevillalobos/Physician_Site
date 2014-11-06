@@ -1,7 +1,7 @@
 Feature: registration
 
-  As an admin
-  so that I can track all the users in the database.
+  As a user
+  so that I can register to the site.
 
   Scenario: Create new user
     Given I'm on the registration page
@@ -13,3 +13,9 @@ Feature: registration
     When I complete the email and password fields
 #    Then show me the page
     Then I should see an error on the user creation
+
+  Scenario: Test password length
+    Given I'm on the registration page
+    When I complete the email and password fields with less than eight chars
+#    Then show me the page
+    Then I should see password error
