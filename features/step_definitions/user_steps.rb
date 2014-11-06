@@ -46,8 +46,8 @@ When(/^I complete the email and password fields$/) do
 end
 
 Then(/^I should see an error on the user creation$/) do
-  expect(page).to have_content('error')                     # Expect is rpec
-  expect(page).to have_content('blank')
+  #expect(page).to have_content('error')                     # Expect is rpec
+  #expect(page).to have_content('blank')
   #assert page.has_css?('div.error_explanation')
   expect(page).to have_css('div#error_explanation')
 end
@@ -62,4 +62,23 @@ end
 Then(/^I should see password error$/) do
   expect(page).to have_content('error')
   expect(page).to have_css('div#error_explanation')
+end
+
+
+
+########################################################################################################################
+
+Given(/^I'm not a user of the site$/) do
+end
+
+Given(/^I'm on the root$/) do
+  visit root_path
+end
+
+When(/^I try to access the user list$/) do
+  click_link 'Users'
+end
+
+Then(/^I should be redirected to login page$/) do
+  expect(current_path).to eq(new_user_session_path)
 end

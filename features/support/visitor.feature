@@ -1,10 +1,10 @@
 Feature: visitor
 
   As a visitor
-  So that I can access my account and preferences
+  Check for access levels
 
-#  Scenario: Test login for user
-#    Given I have an existing user
-#    And I'm on the session page
-#    When I fill sign in fields
-#    Then I should see signed in message
+  Scenario: Test for visitors access restriction to view user list
+    Given I'm not a user of the site
+    And I'm on the root
+    When I try to access the user list
+    Then I should be redirected to login page
