@@ -40,8 +40,8 @@ end
 
 ########################################################################################################################
 When(/^I complete the email and password fields$/) do
-  fill_in :name, :with => "Pedro"
   fill_in :email, :with => "pedrodhers@hotmail.com"
+  fill_in :password, :with => "holahola"
   click_button 'Sign up'
 end
 
@@ -49,5 +49,17 @@ Then(/^I should see an error on the user creation$/) do
   expect(page).to have_content('error')                     # Expect is rpec
   expect(page).to have_content('blank')
   #assert page.has_css?('div.error_explanation')
+  expect(page).to have_css('div#error_explanation')
+end
+
+When(/^I complete the email and password fields with less than eight chars$/) do
+  fill_in :email, :with => "pedrodhers2@hotmail.com"
+  fill_in :password, :with => "short"
+  fill_in :user_password_confirmation, :with => "short"
+  click_button 'Sign up'
+end
+
+Then(/^I should see password error$/) do
+  expect(page).to have_content('error')
   expect(page).to have_css('div#error_explanation')
 end
