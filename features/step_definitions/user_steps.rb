@@ -114,6 +114,16 @@ end
 #end
 
 ########################################################################################################################
+
+When(/^I fill in the name$/) do
+  fill_in :user_name, :with => "John"
+end
+
+When(/^I fill in the email$/) do
+  fill_in :user_email, :with => "john86@hotmail.com"
+end
+
+########################################################################################################################
 When(/^I cancel my account$/) do
   click_button 'Cancel my account'
 end

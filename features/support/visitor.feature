@@ -1,7 +1,8 @@
 Feature: visitor
 
   As a visitor
-  Check for access levels
+  so so that I don't see 
+  I want to be directed to sign up / login
 
   Scenario: Test for visitors access restriction to view user list
     Given I'm not a user of the site
