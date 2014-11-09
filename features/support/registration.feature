@@ -1,7 +1,7 @@
 Feature: registration
 
   As a user
-  so that I can use the site's features available to users
+  so that I can use the site's features available to registered users
   I want to be able to register a new account
 
   Scenario: Create new user
