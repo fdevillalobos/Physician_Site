@@ -26,7 +26,7 @@
       <file leaf-file-name="secrets.yml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/config/secrets.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="23" column="147" selection-start="963" selection-end="1091" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="630">
+            <state line="23" column="147" selection-start="963" selection-end="1091" vertical-scroll-proportion="0.0" vertical-offset="345" max-vertical-offset="630">
               <folding />
             </state>
           </provider>
@@ -35,7 +35,7 @@
       <file leaf-file-name="local_env.yml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/config/local_env.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="11" column="0" selection-start="457" selection-end="457" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="255">
+            <state line="11" column="0" selection-start="457" selection-end="457" vertical-scroll-proportion="0.0" vertical-offset="165" max-vertical-offset="255">
               <folding />
             </state>
           </provider>
@@ -44,7 +44,7 @@
       <file leaf-file-name="routes.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/config/routes.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="27" column="26" selection-start="2118" selection-end="2122" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1500">
+            <state line="27" column="26" selection-start="2118" selection-end="2122" vertical-scroll-proportion="0.0" vertical-offset="405" max-vertical-offset="1500">
               <folding />
             </state>
           </provider>
@@ -62,10 +62,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="reigstration.feature" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="reigstration.feature" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/features/support/reigstration.feature">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="5" column="27" selection-start="101" selection-end="101" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="390">
+            <state line="15" column="0" selection-start="427" selection-end="427" vertical-scroll-proportion="0.2653302" vertical-offset="0" max-vertical-offset="848">
               <folding />
             </state>
           </provider>
@@ -74,7 +74,7 @@
       <file leaf-file-name="visitor.feature" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/features/support/visitor.feature">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="7" column="23" selection-start="187" selection-end="187" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="225">
+            <state line="7" column="23" selection-start="187" selection-end="187" vertical-scroll-proportion="0.0" vertical-offset="105" max-vertical-offset="225">
               <folding />
             </state>
           </provider>
@@ -92,7 +92,7 @@
       <file leaf-file-name="user_steps.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/features/step_definitions/user_steps.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="29" column="11" selection-start="1036" selection-end="1036" vertical-scroll-proportion="0.0" vertical-offset="1144" max-vertical-offset="1770">
+            <state line="29" column="11" selection-start="1036" selection-end="1036" vertical-scroll-proportion="0.0" vertical-offset="435" max-vertical-offset="1770">
               <folding />
             </state>
           </provider>
@@ -101,16 +101,16 @@
       <file leaf-file-name="application.html.erb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/layouts/application.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="31" column="75" selection-start="1275" selection-end="1302" vertical-scroll-proportion="-13.583333" vertical-offset="139" max-vertical-offset="1140">
+            <state line="31" column="75" selection-start="1275" selection-end="1302" vertical-scroll-proportion="0.0" vertical-offset="465" max-vertical-offset="1140">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="session.feature" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="session.feature" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/features/support/session.feature">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="18" column="25" selection-start="559" selection-end="559" vertical-scroll-proportion="0.4313099" vertical-offset="0" max-vertical-offset="626">
+            <state line="18" column="25" selection-start="559" selection-end="559" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="510">
               <folding />
             </state>
           </provider>
@@ -210,6 +210,8 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="RailsProjectView" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -334,12 +336,10 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="RailsProjectView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../yolo-octo-nemesis" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="recentsLimit" value="5" />
     <property name="FullScreen" value="false" />
@@ -547,14 +547,14 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1920" height="1173" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.40921408" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21009919" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.14536741" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.14696486" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -586,9 +586,9 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17944622" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
     </layout-to-restore>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -770,51 +770,37 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/config/environment.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="776">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="776" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/config/database.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="68" selection-start="565" selection-end="565" vertical-scroll-proportion="0.42525774" vertical-offset="0" max-vertical-offset="776">
-          <folding />
-        </state>
+        <state line="22" column="68" selection-start="565" selection-end="565" vertical-scroll-proportion="0.42525774" vertical-offset="0" max-vertical-offset="776" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/config/cucumber.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="776">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="776" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/config/boot.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="776">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="776" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/config/application.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="71" selection-start="1441" selection-end="1441" vertical-scroll-proportion="0.6378866" vertical-offset="0" max-vertical-offset="776">
-          <folding />
-        </state>
+        <state line="33" column="71" selection-start="1441" selection-end="1441" vertical-scroll-proportion="0.6378866" vertical-offset="0" max-vertical-offset="776" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/config/environments/production.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="79" column="96" selection-start="3296" selection-end="3296" vertical-scroll-proportion="0.5979381" vertical-offset="721" max-vertical-offset="1500">
-          <folding />
-        </state>
+        <state line="79" column="96" selection-start="3296" selection-end="3296" vertical-scroll-proportion="0.5979381" vertical-offset="721" max-vertical-offset="1500" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/assets/stylesheets/framework_and_overrides.css.scss">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="20" selection-start="79" selection-end="79" vertical-scroll-proportion="0.04" vertical-offset="0" max-vertical-offset="1320">
-          <folding />
-        </state>
+        <state line="2" column="20" selection-start="79" selection-end="79" vertical-scroll-proportion="0.04" vertical-offset="0" max-vertical-offset="1320" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Gemfile">
@@ -840,9 +826,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/services/create_admin_service.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="49" selection-start="169" selection-end="176" vertical-scroll-proportion="0.05421687" vertical-offset="0" max-vertical-offset="830">
-          <folding />
-        </state>
+        <state line="3" column="49" selection-start="169" selection-end="176" vertical-scroll-proportion="0.05421687" vertical-offset="0" max-vertical-offset="830" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/config/environments/development.rb">
@@ -876,16 +860,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/features/support/reigstration.feature">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="27" selection-start="101" selection-end="101" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="390">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/layouts/application.html.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="75" selection-start="1275" selection-end="1302" vertical-scroll-proportion="-13.583333" vertical-offset="139" max-vertical-offset="1140">
+        <state line="31" column="75" selection-start="1275" selection-end="1302" vertical-scroll-proportion="0.0" vertical-offset="465" max-vertical-offset="1140">
           <folding />
         </state>
       </provider>
@@ -899,7 +876,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/features/support/session.feature">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="25" selection-start="559" selection-end="559" vertical-scroll-proportion="0.4313099" vertical-offset="0" max-vertical-offset="626">
+        <state line="18" column="25" selection-start="559" selection-end="559" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="510">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/features/support/reigstration.feature">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="0" selection-start="427" selection-end="427" vertical-scroll-proportion="0.2653302" vertical-offset="0" max-vertical-offset="848">
           <folding />
         </state>
       </provider>
