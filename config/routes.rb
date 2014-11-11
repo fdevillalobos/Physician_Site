@@ -30,11 +30,19 @@
 # in terminal: annotate --routes
 
 Rails.application.routes.draw do
-  devise_for :users, controllers: {registrations: 'registrations'}    # The second one is the name of MY controller.
+  # devise_for :users, controllers: {registrations: 'registrations'}    # The second one is the name of MY controller.
+  # commented above, and put in below line from OmniAuth's GitHub https://github.com/plataformatec/devise/wiki/OmniAuth:-Overview
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
   match 'users/:id' => 'users#destroy', :via => :delete, :as => :admin_destroy_user
   resources  :users
 
   root 'visitors#index'
+
+  # commented this out from OmniAuth GitHub!!
+  # devise_scope :user do
+  #   get 'sign_out', :to => 'devise/sessions#destroy', :as => :destroy_user_session_2
+  # end
+
 
 
   # The priority is based upon order of creation: first created -> highest priority.
