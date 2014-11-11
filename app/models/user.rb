@@ -22,7 +22,7 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  # added :omniauthable and :omniauth_providers => [:facebook] from omniauth's git
+  # added :omniauthable and :omniauth_providers => [:facebook] from OmniAuth's GitHub
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, :omniauth_providers => [:facebook]
@@ -32,7 +32,7 @@ def self.from_omniauth(auth)
     user.email = auth.info.email
     user.password = Devise.friendly_token[0,20]
     user.name = auth.info.name   # assuming the user model has a name
-    # commented this out from OmniAuth GitHub!!
+    # commented this out from OmniAuth GitHub!!  Don't think an image is created from OmniAuth
     # user.image = auth.info.image # assuming the user model has an image
   end
 end

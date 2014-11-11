@@ -4,7 +4,7 @@ Feature: session
   so that I can manage my user account
   I want to access my account, change account settings, and delete my account
 
-  Scenario: Login
+  Scenario: Login with email
     Given I have an existing user
     And I'm on the session page
     When I fill sign in fields
@@ -53,3 +53,9 @@ Scenario: Change email
     When I'm on the edit user webpage
     When I cancel my account
     Then I should see account successfully cancelled
+
+  Scenario: Login with Facebook
+    Given I have a Facebook account
+    And I am on the Facebook authentication webpage
+    When I sign in with my credentials
+    Then I should see successful Facebook authentication message

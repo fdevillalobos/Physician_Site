@@ -68,6 +68,8 @@ end
 
 ########################################################################################################################
 
+# the below was used for visitor.feature but that was deleted, the below might be used in the future
+
 Given(/^I'm not a user of the site$/) do
 end
 
@@ -185,4 +187,23 @@ end
 Then(/^I see the doctors table reorganized by last name ascending$/) do
   pending # express the regexp above with the code you wish you had
 end
+
+
+
+
+########################################################################################################################
+
+Given(/^I have a Facebook account$/) do
+  pending # express the regexp above with the code you wish you had
+end
+
+Then(/^I should see successful Facebook authentication message$/) do
+  pending # express the regexp above with the code you wish you had
+end
+Given(/^I'm on the Facebook authentication webpage$/) do
+  pending # express the regexp above with the code you wish you had
+  # visit user_omniauth_authorize_path
+  # visit "/users/auth/facebook"
+end
+
 
