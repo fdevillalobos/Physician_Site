@@ -194,16 +194,17 @@ end
 ########################################################################################################################
 
 Given(/^I have a Facebook account$/) do
-  pending # express the regexp above with the code you wish you had
+  # pending # express the regexp above with the code you wish you had
+end
+
+Given(/^I'm currently on the Facebook authentication webpage$/) do
+  # pending # express the regexp above with the code you wish you had
+  visit user_omniauth_authorize_path
+  # visit "/users/auth/facebook"
 end
 
 Then(/^I should see successful Facebook authentication message$/) do
   pending # express the regexp above with the code you wish you had
-end
-Given(/^I'm on the Facebook authentication webpage$/) do
-  pending # express the regexp above with the code you wish you had
-  # visit user_omniauth_authorize_path
-  # visit "/users/auth/facebook"
 end
 
 
