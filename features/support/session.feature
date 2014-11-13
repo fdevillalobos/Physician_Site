@@ -56,6 +56,6 @@ Scenario: Change email
 
   Scenario: Login with Facebook
     Given I have a Facebook account
-    And I am on the Facebook authentication webpage
+    And I'm currently on the Facebook authentication webpage
     When I sign in with my credentials
     Then I should see successful Facebook authentication message
