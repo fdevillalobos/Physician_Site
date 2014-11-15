@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="Rails User_Template: development" uuid="fafad3c2-05d8-49d9-83e2-1203d9a77af8">
+      <secret-storage>memory</secret-storage>
+    </data-source>
+    <data-source name="Rails User_Template: test" uuid="f842691c-9e2d-4391-87e9-05f2c1915514">
+      <secret-storage>memory</secret-storage>
+    </data-source>
+    <data-source name="Rails User_Template: cucumber" uuid="fcdb1543-9063-40fb-b633-6dce66d688b9">
+      <secret-storage>memory</secret-storage>
+    </data-source>
+  </component>
+</project>

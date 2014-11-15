@@ -16,6 +16,9 @@
 #  created_at             :datetime
 #  updated_at             :datetime
 #  name                   :string(255)
+#  admin                  :boolean
+#  provider               :string(255)
+#  uid                    :string(255)
 #
 
 FactoryGirl.define do

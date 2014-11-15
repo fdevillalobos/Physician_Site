@@ -1,0 +1,71 @@
+<h1>Listing physicians</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Street</th>
+      <th>Suite</th>
+      <th>Zip code</th>
+      <th>State</th>
+      <th>Country</th>
+      <th>Specialty</th>
+      <th>Medical school</th>
+      <th>Npi</th>
+      <th>Gender</th>
+      <th>Birth day</th>
+      <th>Birth month</th>
+      <th>Birth year</th>
+      <th>Phone</th>
+      <th>Residency hospital</th>
+      <th>Affiliation hospital</th>
+      <th>Credential</th>
+      <th>Medical school grad year</th>
+      <th>Residency grad year</th>
+      <th>License number</th>
+      <th>License state</th>
+      <th>Group prectice</th>
+      <th>Medicare</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @physicians.each do |physician| %>
+      <tr>
+        <td><%= physician.name %></td>
+        <td><%= physician.email %></td>
+        <td><%= physician.street %></td>
+        <td><%= physician.suite %></td>
+        <td><%= physician.zip_code %></td>
+        <td><%= physician.state %></td>
+        <td><%= physician.country %></td>
+        <td><%= physician.specialty %></td>
+        <td><%= physician.medical_school %></td>
+        <td><%= physician.NPI %></td>
+        <td><%= physician.gender %></td>
+        <td><%= physician.birth_day %></td>
+        <td><%= physician.birth_month %></td>
+        <td><%= physician.birth_year %></td>
+        <td><%= physician.phone %></td>
+        <td><%= physician.residency_hospital %></td>
+        <td><%= physician.affiliation_hospital %></td>
+        <td><%= physician.credential %></td>
+        <td><%= physician.medical_school_grad_year %></td>
+        <td><%= physician.residency_grad_year %></td>
+        <td><%= physician.license_number %></td>
+        <td><%= physician.license_state %></td>
+        <td><%= physician.group_prectice %></td>
+        <td><%= physician.medicare %></td>
+        <td><%= link_to 'Show', physician %></td>
+        <td><%= link_to 'Edit', edit_physician_path(physician) %></td>
+        <td><%= link_to 'Destroy', physician, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Physician', new_physician_path %>

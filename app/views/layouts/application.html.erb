@@ -17,7 +17,16 @@
     <%= javascript_include_tag "application" %>
   </head>
   <body>
-    <%= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook) %>
+  <!-- Facebook login JavaScript -->
+  <div id="fb-root"></div>
+  <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.0";
+      fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));</script>
+
     <div class="navbar navbar-default navbar-static-top">
       <div class="container">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
@@ -32,6 +41,7 @@
                 <li><%= link_to 'Edit account', edit_user_registration_path %></li>
                 <li><%= link_to 'Sign out', destroy_user_session_path, :method=>'delete' %></li>
             <% else %>
+                <li><%= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook) %></li>
                 <li><%= link_to 'Sign in', new_user_session_path %></li>
                 <li><%= link_to "Sign Up", new_user_registration_path  %></li>
             <% end %>

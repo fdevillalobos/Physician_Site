@@ -11,7 +11,111 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141109063043) do
+ActiveRecord::Schema.define(version: 20141115173433) do
+
+  create_table "countries", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "credentials", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "genders", force: true do |t|
+    t.string   "type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "group_practices", force: true do |t|
+    t.string   "name"
+    t.integer  "group_id"
+    t.integer  "speciality_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "group_practices", ["speciality_id"], name: "index_group_practices_on_speciality_id"
+
+  create_table "hospitals", force: true do |t|
+    t.string   "name"
+    t.integer  "state_id"
+    t.integer  "ranking"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "hospitals", ["state_id"], name: "index_hospitals_on_state_id"
+
+  create_table "medical_schools", force: true do |t|
+    t.string   "name"
+    t.integer  "ranking"
+    t.integer  "state_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "medical_schools", ["state_id"], name: "index_medical_schools_on_state_id"
+
+  create_table "months", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "physicians", force: true do |t|
+    t.string   "name"
+    t.string   "email"
+    t.string   "street"
+    t.string   "suite"
+    t.integer  "zip_code_id"
+    t.integer  "state_id"
+    t.integer  "country_id"
+    t.integer  "specialty_id"
+    t.integer  "medical_school_id"
+    t.integer  "NPI"
+    t.integer  "gender_id"
+    t.integer  "birth_day"
+    t.string   "birth_month"
+    t.integer  "birth_year"
+    t.integer  "phone"
+    t.string   "residency_hospital"
+    t.string   "affiliation_hospital"
+    t.integer  "credential_id"
+    t.integer  "medical_school_grad_year"
+    t.integer  "residency_grad_year"
+    t.integer  "license_number"
+    t.string   "license_state"
+    t.integer  "group_practice_id"
+    t.boolean  "medicare"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "physicians", ["country_id"], name: "index_physicians_on_country_id"
+  add_index "physicians", ["credential_id"], name: "index_physicians_on_credential_id"
+  add_index "physicians", ["gender_id"], name: "index_physicians_on_gender_id"
+  add_index "physicians", ["group_practice_id"], name: "index_physicians_on_group_practice_id"
+  add_index "physicians", ["medical_school_id"], name: "index_physicians_on_medical_school_id"
+  add_index "physicians", ["specialty_id"], name: "index_physicians_on_specialty_id"
+  add_index "physicians", ["state_id"], name: "index_physicians_on_state_id"
+  add_index "physicians", ["zip_code_id"], name: "index_physicians_on_zip_code_id"
+
+  create_table "specialities", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "states", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -34,5 +138,14 @@ ActiveRecord::Schema.define(version: 20141109063043) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+
+  create_table "zip_codes", force: true do |t|
+    t.integer  "zip"
+    t.integer  "state_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "zip_codes", ["state_id"], name: "index_zip_codes_on_state_id"
 
 end
