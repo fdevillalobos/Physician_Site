@@ -11,5 +11,6 @@
 #
 
 class GroupPractice < ActiveRecord::Base
-  has_many :specialities
+  has_many :specialties
+  has_many :physicians
 end

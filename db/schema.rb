@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141115173433) do
+ActiveRecord::Schema.define(version: 20141115200343) do
 
   create_table "countries", force: true do |t|
     t.string   "name"
@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 20141115173433) do
   end
 
   create_table "genders", force: true do |t|
-    t.string   "type"
+    t.string   "sex"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -70,42 +70,33 @@ ActiveRecord::Schema.define(version: 20141115173433) do
   create_table "physicians", force: true do |t|
     t.string   "name"
     t.string   "email"
-    t.string   "street"
-    t.string   "suite"
-    t.integer  "zip_code_id"
-    t.integer  "state_id"
     t.integer  "country_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "state_id"
     t.integer  "specialty_id"
     t.integer  "medical_school_id"
     t.integer  "NPI"
     t.integer  "gender_id"
-    t.integer  "birth_day"
-    t.string   "birth_month"
-    t.integer  "birth_year"
+    t.date     "birth"
     t.integer  "phone"
-    t.string   "residency_hospital"
-    t.string   "affiliation_hospital"
+    t.integer  "residency_hospital_id"
+    t.integer  "affiliation_hospital_id"
     t.integer  "credential_id"
-    t.integer  "medical_school_grad_year"
-    t.integer  "residency_grad_year"
-    t.integer  "license_number"
-    t.string   "license_state"
     t.integer  "group_practice_id"
-    t.boolean  "medicare"
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
+  add_index "physicians", ["affiliation_hospital_id"], name: "index_physicians_on_affiliation_hospital_id"
   add_index "physicians", ["country_id"], name: "index_physicians_on_country_id"
   add_index "physicians", ["credential_id"], name: "index_physicians_on_credential_id"
   add_index "physicians", ["gender_id"], name: "index_physicians_on_gender_id"
   add_index "physicians", ["group_practice_id"], name: "index_physicians_on_group_practice_id"
   add_index "physicians", ["medical_school_id"], name: "index_physicians_on_medical_school_id"
+  add_index "physicians", ["residency_hospital_id"], name: "index_physicians_on_residency_hospital_id"
   add_index "physicians", ["specialty_id"], name: "index_physicians_on_specialty_id"
   add_index "physicians", ["state_id"], name: "index_physicians_on_state_id"
-  add_index "physicians", ["zip_code_id"], name: "index_physicians_on_zip_code_id"
 
-  create_table "specialities", force: true do |t|
+  create_table "specialties", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"

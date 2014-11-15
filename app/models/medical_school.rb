@@ -12,4 +12,5 @@
 
 class MedicalSchool < ActiveRecord::Base
   has_one :state
+  has_many :physicians
 end

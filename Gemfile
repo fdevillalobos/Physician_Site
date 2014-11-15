@@ -33,6 +33,7 @@ group :development do
 end
 group :development, :test do
   gem 'factory_girl_rails'
+  gem 'rails_refactor'
   #gem 'faker'
   #gem 'rspec-rails'
   #gem 'sqlite3'

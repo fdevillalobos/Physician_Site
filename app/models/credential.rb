@@ -9,4 +9,5 @@
 #
 
 class Credential < ActiveRecord::Base
+  has_many :physicians
 end

@@ -1,114 +1,61 @@
 <%= form_for(@physician) do |f| %>
-  <% if @physician.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@physician.errors.count, "error") %> prohibited this physician from being saved:</h2>
+    <% if @physician.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@physician.errors.count, "error") %> prohibited this physician from being saved:</h2>
 
-      <ul>
-      <% @physician.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+          <ul>
+            <% @physician.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :name %><br>
+      <%= f.text_field :name %>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :email %><br>
-    <%= f.text_field :email %>
-  </div>
-  <div class="field">
-    <%= f.label :street %><br>
-    <%= f.text_field :street %>
-  </div>
-  <div class="field">
-    <%= f.label :suite %><br>
-    <%= f.text_field :suite %>
-  </div>
-  <div class="field">
-    <%= f.label :zip_code_id %><br>
-    <%= f.number_field :zip_code_id %>
-  </div>
-  <div class="field">
-    <%= f.label :state_id %><br>
-    <%= collection_select :physician, :state_id, State.all, :id, :name%>
-
-  </div>
-  <div class="field">
-    <%= f.label :country_id %><br>
-    <%= f.number_field :country_id %>
-  </div>
-  <div class="field">
-    <%= f.label :specialty_id %><br>
-    <%= f.number_field :specialty_id %>
-  </div>
-  <div class="field">
-    <%= f.label :medical_school_id %><br>
-    <%= f.number_field :medical_school_id %>
-  </div>
-  <div class="field">
-    <%= f.label :NPI %><br>
-    <%= f.number_field :NPI %>
-  </div>
-  <div class="field">
-    <%= f.label :gender_id %><br>
-    <%= f.number_field :gender_id %>
-  </div>
-  <div class="field">
-    <%= f.label :birth_day %><br>
-    <%= f.number_field :birth_day %>
-  </div>
-  <div class="field">
-    <%= f.label :birth_month %><br>
-    <%= f.text_field :birth_month %>
-  </div>
-  <div class="field">
-    <%= f.label :birth_year %><br>
-    <%= f.number_field :birth_year %>
-  </div>
-  <div class="field">
-    <%= f.label :phone %><br>
-    <%= f.number_field :phone %>
-  </div>
-  <div class="field">
-    <%= f.label :residency_hospital %><br>
-    <%= f.number_field :residency_hospital %>
-  </div>
-  <div class="field">
-    <%= f.label :affiliation_hospital %><br>
-    <%= f.number_field :affiliation_hospital %>
-  </div>
-  <div class="field">
-    <%= f.label :credential_id %><br>
-    <%= f.number_field :credential_id %>
-  </div>
-  <div class="field">
-    <%= f.label :medical_school_grad_year %><br>
-    <%= f.number_field :medical_school_grad_year %>
-  </div>
-  <div class="field">
-    <%= f.label :residency_grad_year %><br>
-    <%= f.number_field :residency_grad_year %>
-  </div>
-  <div class="field">
-    <%= f.label :license_number %><br>
-    <%= f.number_field :license_number %>
-  </div>
-  <div class="field">
-    <%= f.label :license_state %><br>
-    <%= f.number_field :license_state %>
-  </div>
-  <div class="field">
-    <%= f.label :group_practice_id %><br>
-    <%= f.number_field :group_practice_id %>
-  </div>
-  <div class="field">
-    <%= f.label :medicare %><br>
-    <%= f.text_field :medicare %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+    <div class="field">
+      <%= f.label :email %><br>
+      <%= f.text_field :email %>
+    </div>
+    <div class="field">
+      <%= f.label :country_id %><br>
+      <%= collection_select :physician, :country_id, Country.all, :id, :name%>
+    </div>
+    <div class="field">
+      <%= f.label :state_id %><br>
+      <%= collection_select :physician, :state_id, State.all, :id, :name%>
+    </div>
+    <div class="field">
+      <%= f.label :specialty_id %><br>
+      <%= collection_select :physician, :specialty_id, Specialty.all, :id, :name%>
+    </div>
+    <div class="field">
+      <%= f.label :medical_school_id %><br>
+      <%= collection_select :physician, :medical_school_id, MedicalSchool.all, :id, :name%>
+    </div>
+    <div class="field">
+      <%= f.label :gender_id %><br>
+      <%= collection_select :physician, :gender_id, Gender.all, :id, :sex%>
+    </div>
+    <div class="field">
+      <%= f.label :residency_hospital_id %><br>
+      <%= collection_select :physician, :residency_hospital_id, Hospital.all, :id, :name%>
+    </div>
+    <div class="field">
+      <%= f.label :affiliation_hospital_id %><br>
+      <%= collection_select :physician, :affiliation_hospital_id, Hospital.all, :id, :name%>
+    </div>
+    <div class="field">
+      <%= f.label :credential_id %><br>
+      <%= collection_select :physician, :credential_id, Credential.all, :id, :name%>
+    </div>
+    <div class="field">
+      <%= f.label :group_practice_id %><br>
+      <%= collection_select :physician, :group_practice_id, GroupPractice.all, :id, :name%>
+    </div>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
 <% end %>

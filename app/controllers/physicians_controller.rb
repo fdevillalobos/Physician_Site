@@ -22,7 +22,6 @@ class PhysiciansController < ApplicationController
 
   def create
     @physician = Physician.new(physician_params)
-    # @physician = Physician.new(params[:physician])
     flash[:notice] = 'Physician was successfully created.' if @physician.save
     respond_with(@physician)
   end
@@ -43,6 +42,6 @@ class PhysiciansController < ApplicationController
     end
 
     def physician_params
-      params.require(:physician).permit(:name, :email, :street, :suite, :zip_code_id, :state_id, :country_id, :specialty_id, :medical_school_id, :NPI, :gender_id, :birth_day, :birth_month, :birth_year, :phone, :residency_hospital, :affiliation_hospital, :credential_id, :medical_school_grad_year, :residency_grad_year, :license_number, :license_state, :group_practice_id, :medicare)
+      params.require(:physician).permit(:name, :email, :country_id, :state_id, :specialty_id, :medical_school_id, :NPI, :gender_id, :birth, :phone, :residency_hospital_id, :affiliation_hospital_id, :credential_id, :group_practice_id)
     end
 end

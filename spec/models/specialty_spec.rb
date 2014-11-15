@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: specialities
+# Table name: specialties
 #
 #  id         :integer          not null, primary key
 #  name       :string(255)
@@ -8,6 +8,8 @@
 #  updated_at :datetime
 #
 
-class Speciality < ActiveRecord::Base
-  has_many :group_practices
+require 'rails_helper'
+
+RSpec.describe Specialty, :type => :model do
+  pending "add some examples to (or delete) #{__FILE__}"
 end

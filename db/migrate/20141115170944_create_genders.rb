@@ -1,7 +1,7 @@
 class CreateGenders < ActiveRecord::Migration
   def change
     create_table :genders do |t|
-      t.string :type
+      t.string :sex
 
       t.timestamps
     end
