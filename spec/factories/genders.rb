@@ -3,7 +3,7 @@
 # Table name: genders
 #
 #  id         :integer          not null, primary key
-#  type       :string(255)
+#  sex        :string(255)
 #  created_at :datetime
 #  updated_at :datetime
 #

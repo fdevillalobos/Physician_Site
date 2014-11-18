@@ -9,7 +9,6 @@
 #  created_at              :datetime
 #  updated_at              :datetime
 #  state_id                :integer
-#  specialty_id            :integer
 #  medical_school_id       :integer
 #  NPI                     :integer
 #  gender_id               :integer
@@ -27,7 +26,8 @@ class Physician < ActiveRecord::Base
   belongs_to :state
   belongs_to :medical_school
   belongs_to :group_practice    # Not working
-  belongs_to :specialty            # Not working
+  # belongs_to :specialty            # Not working
+  has_and_belongs_to_many :specialties
   belongs_to :gender
   belongs_to :credential
   # REFERENCING TWO COLUMNS IN THE SAME TABLE TO TWO DIFFERENT OBJECTS IN ANOTHER TABLE

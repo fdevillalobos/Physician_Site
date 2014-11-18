@@ -9,7 +9,6 @@
 #  created_at              :datetime
 #  updated_at              :datetime
 #  state_id                :integer
-#  specialty_id            :integer
 #  medical_school_id       :integer
 #  NPI                     :integer
 #  gender_id               :integer

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141115200343) do
+ActiveRecord::Schema.define(version: 20141117183403) do
 
   create_table "countries", force: true do |t|
     t.string   "name"
@@ -74,7 +74,6 @@ ActiveRecord::Schema.define(version: 20141115200343) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "state_id"
-    t.integer  "specialty_id"
     t.integer  "medical_school_id"
     t.integer  "NPI"
     t.integer  "gender_id"
@@ -93,8 +92,15 @@ ActiveRecord::Schema.define(version: 20141115200343) do
   add_index "physicians", ["group_practice_id"], name: "index_physicians_on_group_practice_id"
   add_index "physicians", ["medical_school_id"], name: "index_physicians_on_medical_school_id"
   add_index "physicians", ["residency_hospital_id"], name: "index_physicians_on_residency_hospital_id"
-  add_index "physicians", ["specialty_id"], name: "index_physicians_on_specialty_id"
   add_index "physicians", ["state_id"], name: "index_physicians_on_state_id"
+
+  create_table "physicians_specialties", id: false, force: true do |t|
+    t.integer "physician_id", null: false
+    t.integer "specialty_id", null: false
+  end
+
+  add_index "physicians_specialties", ["physician_id", "specialty_id"], name: "index_physicians_specialties_on_physician_id_and_specialty_id"
+  add_index "physicians_specialties", ["specialty_id", "physician_id"], name: "index_physicians_specialties_on_specialty_id_and_physician_id"
 
   create_table "specialties", force: true do |t|
     t.string   "name"
