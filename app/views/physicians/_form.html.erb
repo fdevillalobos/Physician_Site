@@ -36,8 +36,13 @@
       <%= collection_select :physician, :gender_id, Gender.all, :id, :sex%>
     </div>
     <div class="field">
-      <%= f.label :residency_hospital_id %><br>
-      <%= collection_select :physician, :residency_hospital_id, Hospital.all, :id, :name%>
+      <%= f.label :specialties_id %><br>
+      <%= f.select :specialties, options_for_select(Specialty.select(:name).map(&:name).uniq), {:prompt => "Please select"}, {:multiple => true, :style => "width:450px;" } %>
+    </div>
+
+    <div class="field">
+      <%= f.label :reshosp_id %><br>
+      <%= f.select :residency_hospital_id, options_for_select(Hospital.select(:name).map(&:name)), {:prompt => "Please select"}, {:multiple => true, :style => "width:450px;" } %>
     </div>
     <div class="field">
       <%= f.label :affiliation_hospital_id %><br>
