@@ -28,10 +28,6 @@
       <%= collection_select :physician, :state_id, State.all, :id, :name%>
     </div>
     <div class="field">
-      <%= f.label :specialty_id %><br>
-      <%= collection_select :physician, :specialty_id, Specialty.all, :id, :name%>
-    </div>
-    <div class="field">
       <%= f.label :medical_school_id %><br>
       <%= collection_select :physician, :medical_school_id, MedicalSchool.all, :id, :name%>
     </div>

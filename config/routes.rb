@@ -54,7 +54,11 @@ Rails.application.routes.draw do
   #   get 'sign_out', :to => 'devise/sessions#destroy', :as => :destroy_user_session_2
   # end
 
-
+  # Somethin from Swaps class:
+  # match 'photos/show' => 'photos#show', via => get
+  # is the same as
+  # get 'photos/show'
+  # But if you want to do something more complex you should know the other one.
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
