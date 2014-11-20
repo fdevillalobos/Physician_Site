@@ -109,7 +109,7 @@
     <div class="control-group">
       <%= f.label :specialties, :class => 'control-label' %>
       <div class="controls">
-        <%= f.select :specialties, options_for_select(Specialty.select(:name).map(&:name).uniq), {}, {:multiple => true, :style => "width:250px;" , :class => 'form-control'} %>
+        <%= f.collection_select :specialties, Specialty.all, :id, :name, {}, {:multiple => true, class: 'form-control'} %>
       </div>
       <%= error_span(@physician[:group_practice_id]) %>
     </div>

@@ -23,8 +23,14 @@
 class Physician < ActiveRecord::Base
 
   def self.search(query)
-    where("name LIKE ? OR country_id LIKE ?", "%#{query}%", "%#{query}%")
-    # User.joins(:account).merge(Account.where(:active => true))
+    # query[:name]
+    # where("name LIKE ? OR country_id LIKE ?", "%#{query}%", "%#{query}%")
+    # Physician.joins(:country).where("countries.name like ?", country)
+    # joins(:country).where("countries.name like ? or physicians.name LIKE ?", "%#{query}%", "%#{query}%")
+
+    @names = Physician.where("name LIKE ?", "%#{query}%")
+    @country_physicians = Physician.joins(:country, :state).where("countries.name LIKE ? OR states.name LIKE ?", "%#{query}%", "%#{query}%")
+    return @names + @country_physicians
   end
 
 

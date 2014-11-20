@@ -6,7 +6,8 @@ class PhysiciansController < ApplicationController
 
   def index
     if params[:search]
-      @physicians = Physician.search(params[:search]).order("name ASC")
+      # @search_name = params[:search][:name]
+      @physicians = Physician.search(params[:search]) #.order("name ASC")
     else
       @physicians = Physician.all.order('name ASC')
     end
@@ -29,8 +30,8 @@ class PhysiciansController < ApplicationController
 
   def create
     @physician = Physician.new(physician_params)
-    # @specialties = Specialty.where(name: physician_params[:specialties]).limit(6)
-    # @physician.specialties << @specialties
+    @specialties = Specialty.find(params[:physician][:specialties].drop(1))
+    @physician.specialties = @specialties
     flash[:notice] = 'Physician was successfully created.' if @physician.save
     respond_with(@physician)
   end
