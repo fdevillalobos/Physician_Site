@@ -5,7 +5,13 @@ class PhysiciansController < ApplicationController
   respond_to :html
 
   def index
-    @physicians = Physician.all
+    if params[:search]
+      @physicians = Physician.search(params[:search]).order("name ASC")
+    else
+      @physicians = Physician.all.order('name ASC')
+    end
+
+    # @physicians = Physician.all
     respond_with(@physicians)
   end
 

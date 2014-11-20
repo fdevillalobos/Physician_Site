@@ -21,6 +21,13 @@
 #
 
 class Physician < ActiveRecord::Base
+
+  def self.search(query)
+    where("name LIKE ? OR country_id LIKE ?", "%#{query}%", "%#{query}%")
+    # User.joins(:account).merge(Account.where(:active => true))
+  end
+
+
   # We changed everything to belongs_to because has_one or has_many were not working.
   belongs_to :country
   belongs_to :state
