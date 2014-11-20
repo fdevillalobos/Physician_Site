@@ -22,6 +22,8 @@ class PhysiciansController < ApplicationController
 
   def create
     @physician = Physician.new(physician_params)
+    # @specialties = Specialty.where(name: physician_params[:specialties]).limit(6)
+    # @physician.specialties << @specialties
     flash[:notice] = 'Physician was successfully created.' if @physician.save
     respond_with(@physician)
   end

@@ -1,29 +1,45 @@
-<p id="notice"><%= notice %></p>
+<%- model_class = Physician -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+</div>
 
-<p>
-  <strong>Name:</strong>
-  <%= @physician.name %>
-</p>
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:name) %>:</strong></dt>
+  <dd><%= @physician.name %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:email) %>:</strong></dt>
+  <dd><%= @physician.email %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:country) %>:</strong></dt>
+  <dd><%= @physician.country.name unless @physician.country.nil? %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:state) %>:</strong></dt>
+  <dd><%= @physician.state.name unless @physician.state.nil? %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:medical_school) %>:</strong></dt>
+  <dd><%= @physician.medical_school.name unless @physician.medical_school.nil? %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:NPI) %>:</strong></dt>
+  <dd><%= @physician.NPI %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:gender) %>:</strong></dt>
+  <dd><%= @physician.gender.sex %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:birth) %>:</strong></dt>
+  <dd><%= @physician.birth %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:phone) %>:</strong></dt>
+  <dd><%= @physician.phone %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:residency_hospital) %>:</strong></dt>
+  <dd><%= @physician.residency_hospital.name unless @physician.residency_hospital.nil? %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:affiliation_hospital) %>:</strong></dt>
+  <dd><%= @physician.affiliation_hospital.name unless @physician.affiliation_hospital.nil? %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:credential) %>:</strong></dt>
+  <dd><%= @physician.credential.name %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:group_practice) %>:</strong></dt>
+  <dd><%= @physician.group_practice.name unless @physician.group_practice.nil? %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:specialties) %>:</strong></dt>
+  <dd><%= @physician.specialties.select(:name).map(&:name).join(', ') %></dd>
+</dl>
 
-<p>
-  <strong>Email:</strong>
-  <%= @physician.email %>
-</p>
-
-<p>
-  <strong>Country:</strong>
-  <%= @physician.country.name %>
-</p>
-
-<p>
-  <strong>Specialties:</strong>
-  <%= @physician.specialties.name %>
-</p>
-
-<p>
-  <strong>Residency Hospital:</strong>
-  <%= @physician.residency_hospital.name %>
-</p>
-
-<%= link_to 'Edit', edit_physician_path(@physician) %> |
-<%= link_to 'Back', physicians_path %>
+<%= link_to t('.back', :default => t("helpers.links.back")),
+              physicians_path, :class => 'btn btn-default'  %>
+<%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_physician_path(@physician), :class => 'btn btn-default' %>
+<%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              physician_path(@physician),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>

@@ -33,4 +33,10 @@ class Physician < ActiveRecord::Base
   # REFERENCING TWO COLUMNS IN THE SAME TABLE TO TWO DIFFERENT OBJECTS IN ANOTHER TABLE
   belongs_to :residency_hospital, class_name: "Hospital"
   belongs_to :affiliation_hospital, class_name: "Hospital"
+
+  # Validations
+  validates :gender_id, :credential_id, presence: true
+  validates :email, uniqueness: true
+  # Fairly nice Regex email validator that will ensure that your email has the correct formatting and at least could exist.
+  validates_format_of :email, :with => /[a-z0-9!#$%&'*+\/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+\/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+(?:[A-Z]{2}|com|org|net|edu|gov|mil|biz|info|mobi|name|aero|asia|jobs|museum)\b/, :on => :create
 end
