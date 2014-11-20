@@ -12,4 +12,5 @@ class State < ActiveRecord::Base
   has_many :medical_schools
   has_many :hospitals
   has_many :physicians
+  validates_presence_of :name
 end

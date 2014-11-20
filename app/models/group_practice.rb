@@ -13,4 +13,5 @@
 class GroupPractice < ActiveRecord::Base
   has_many :specialties
   has_many :physicians
+  validates_presence_of :name, :group_id
 end

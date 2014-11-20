@@ -35,8 +35,8 @@ class Physician < ActiveRecord::Base
   belongs_to :affiliation_hospital, class_name: "Hospital"
 
   # Validations
-  validates :gender_id, :credential_id, presence: true
-  validates :email, uniqueness: true
+  validates_presence_of :gender_id, :credential_id, :name
+  validates_uniqueness_of :email
   # Fairly nice Regex email validator that will ensure that your email has the correct formatting and at least could exist.
   validates_format_of :email, :with => /[a-z0-9!#$%&'*+\/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+\/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+(?:[A-Z]{2}|com|org|net|edu|gov|mil|biz|info|mobi|name|aero|asia|jobs|museum)\b/, :on => :create
 end

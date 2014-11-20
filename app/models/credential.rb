@@ -10,4 +10,5 @@
 
 class Credential < ActiveRecord::Base
   has_many :physicians
+  validates_presence_of :name
 end

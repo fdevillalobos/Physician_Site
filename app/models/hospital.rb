@@ -13,4 +13,5 @@
 class Hospital < ActiveRecord::Base
   has_one :state
   # has_many :assigned_tickets, :class_name => "Physician", :foreign_key => "residency_hospital_id"
+  validates_presence_of :name
 end
