@@ -28,9 +28,11 @@ class Physician < ActiveRecord::Base
     # Physician.joins(:country).where("countries.name like ?", country)
     # joins(:country).where("countries.name like ? or physicians.name LIKE ?", "%#{query}%", "%#{query}%")
 
-    @names = Physician.where("name LIKE ?", "%#{query}%")
-    @country_physicians = Physician.joins(:country, :state).where("countries.name LIKE ? OR states.name LIKE ?", "%#{query}%", "%#{query}%")
-    return @names + @country_physicians
+    @no_join = Physician.where("name LIKE ? OR email LIKE ? OR NPI LIKE ? OR phone LIKE ?", "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%")
+    @join = Physician.joins(:country, :state, :medical_school, :gender, :credential, :group_practice, :residency_hospital, :affiliation_hospital)
+                .where("countries.name LIKE ? OR states.name LIKE ? OR medical_schools.name LIKE ? OR genders.sex LIKE ? OR credentials.name LIKE ? OR group_practices.name LIKE ? OR hospitals.name LIKE ?",
+                       "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%")
+    return @no_join + @join
   end
 
 
