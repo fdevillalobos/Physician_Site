@@ -7,3 +7,11 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 user = CreateAdminService.new.call
 puts 'CREATED ADMIN USER: ' << user.email
+
+# Create Guest User
+user = User.find_or_create_by!(email: 'guest@guest.com') do |user|
+  user.password = 'guest1234'
+  user.password_confirmation = 'guest1234'
+  user.name = 'Guest'
+  user.admin = false
+end

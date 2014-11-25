@@ -43,6 +43,8 @@ class PhysiciansController < ApplicationController
 
   def update
     flash[:notice] = 'Physician was successfully updated.' if @physician.update(physician_params)
+    @specialties = Specialty.find(params[:physician][:specialties].drop(1))
+    @physician.specialties = @specialties
     respond_with(@physician)
   end
 
