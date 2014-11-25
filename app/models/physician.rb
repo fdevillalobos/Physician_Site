@@ -28,10 +28,10 @@ class Physician < ActiveRecord::Base
     # Physician.joins(:country).where("countries.name like ?", country)
     # joins(:country).where("countries.name like ? or physicians.name LIKE ?", "%#{query}%", "%#{query}%")
 
-    @no_join = Physician.where("name LIKE ? OR email LIKE ? OR NPI LIKE ? OR phone LIKE ?", "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%")
-    @join = Physician.joins(:country, :state, :medical_school, :gender, :credential, :group_practice, :residency_hospital, :affiliation_hospital)
-                .where("countries.name LIKE ? OR states.name LIKE ? OR medical_schools.name LIKE ? OR genders.sex LIKE ? OR credentials.name LIKE ? OR group_practices.name LIKE ? OR hospitals.name LIKE ? OR affiliation_hospitals_physicians.name LIKE ?",
-                       "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%")
+    @no_join = Physician.where("name LIKE ? OR NPI LIKE ? OR phone LIKE ?", "%#{query}%", "%#{query}%", "%#{query}%")
+    @join = Physician.joins(:country, :state, :medical_school, :gender, :credential, :group_practice, :residency_hospital, :affiliation_hospital, :specialties)
+                .where("countries.name LIKE ? OR states.name LIKE ? OR medical_schools.name LIKE ? OR genders.sex LIKE ? OR credentials.name LIKE ? OR group_practices.name LIKE ? OR hospitals.name LIKE ? OR affiliation_hospitals_physicians.name LIKE ? OR specialties.name LIKE ?",
+                       "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%")
     return @no_join + @join
   end
 

@@ -1,5 +1,5 @@
 class PhysiciansController < ApplicationController
-  before_filter :authenticate_user!
+  # before_filter :authenticate_user!
   before_action :set_physician, only: [:show, :edit, :update, :destroy]
 
   respond_to :html
@@ -8,6 +8,7 @@ class PhysiciansController < ApplicationController
     if params[:search]
       # @search_name = params[:search][:name]
       @physicians = Physician.search(params[:search]) #.order("name ASC")
+      flash[:notice] = "Your search returned #{@physicians.size} results"
     else
       @physicians = Physician.all.order('name ASC')
     end

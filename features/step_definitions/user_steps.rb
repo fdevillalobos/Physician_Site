@@ -136,13 +136,53 @@ end
 
 ########################################################################################################################
 
-Given(/^I'm on the doctor search webpage$/) do
-  pending # express the regexp above with the code you wish you had
+Given(/^doctors are in the database$/) do
+  @gender_m = Gender.create(:sex => "male")
+  @gender_f = Gender.create(:sex => "female")
+  @credential = Credential.create(:name => "MD")
+  @physician = Physician.create(:name => 'Martin Bohnenkamp', :email => 'martin.bohnenkamp@uphs.upenn.edu')
+  @physician.credential, @physician.gender = @credential, @gender_m
+  @physician.save!
+
+  @physician2 = Physician.create(:name => 'Stephanie Ewing', :email => 'fakeemail@fakehost.com')
+  @physician2.credential, @physician2.gender = @credential, @gender_f
+  @physician2.save!
 end
 
-When(/^I search for a doctor$/) do
-  pending # express the regexp above with the code you wish you had
+Given(/^the doctors database has many doctors$/) do
+  pending
 end
+
+Given(/^I'm on the doctor search webpage$/) do
+  visit physicians_path
+end
+
+When(/^I search for a doctor who exists in the database$/) do
+  fill_in :search, :with => "bohnenkamp" # id for search field is  "search"
+  click_button 'Search' # button's value is "Search"
+end
+
+When(/^I search for a doctor who doesn't exist in the database$/) do
+  fill_in :search, :with => "abcdefghijklmnopqrstuvwxyz" # id for search field is  "search"
+  click_button 'Search' # button's value is "Search"
+end
+
+When(/^I search with search terms that will give me many results$/) do
+  #pending
+end
+
+Then(/^I should see a list of doctors$/) do
+  expect(page).to have_content(/Your search returned (.*) results/)
+  expect(page).to have_no_content(/Your search returned 0 results/)
+  # the two above could be combined into something that makes sure $1 != '0' in the first statement
+end
+
+Then(/^I should not get any results$/) do
+  expect(page).to have_content(/Your search returned 0 results/)
+  # the two above could be combined into something that makes sure $1 != '0' in the first statement
+end
+
+
 
 Then(/^I should see a table of the top (\d+) quality doctors$/) do |arg1|
   pending # express the regexp above with the code you wish you had
@@ -156,11 +196,9 @@ Then(/^I should see a form whose default values equal my search parameters$/) do
   pending # express the regexp above with the code you wish you had
 end
 
-Given(/^I've searched for a doctor$/) do
-  pending # express the regexp above with the code you wish you had
-end
 
-Given(/^I'm on the doctor results webpage$/) do
+
+Given(/^I've searched for a doctor$/) do
   pending # express the regexp above with the code you wish you had
 end
 
@@ -194,13 +232,13 @@ end
 ########################################################################################################################
 
 Given(/^I have a Facebook account$/) do
-  # pending # express the regexp above with the code you wish you had
+  pending
 end
 
 Given(/^I'm currently on the Facebook authentication webpage$/) do
-  # pending # express the regexp above with the code you wish you had
-  visit user_omniauth_authorize_path
-  # visit "/users/auth/facebook"
+  pending
+  # the line below should work in theory but think Capybara is not well-hooked into external sites e.g. Facebook
+  # visit user_omniauth_authorize_path
 end
 
 Then(/^I should see successful Facebook authentication message$/) do

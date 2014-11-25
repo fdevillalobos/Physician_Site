@@ -7,7 +7,7 @@
   <div class="form-group">
     <div class="input-group">
       <label class="sr-only" for="search">Search Physician Database</label>
-      <input type="search" class="form-control" id="search" style="width:300px" placeholder="Search Physician">
+      <input type="search" class="form-control" id="search-hidden" style="width:300px" placeholder="Search Physician">
     </div>
   </div>
   <button type="submit" class="btn btn-default">Search</button>
@@ -37,6 +37,7 @@
       <th><%= model_class.human_attribute_name(:affiliation_hospital_id) %></th>
       <th><%= model_class.human_attribute_name(:credential_id) %></th>
       <th><%= model_class.human_attribute_name(:group_practice_id) %></th>
+      <th><%= model_class.human_attribute_name(:specialties) %></th>
       <th><%= model_class.human_attribute_name(:created_at) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
