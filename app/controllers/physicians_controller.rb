@@ -14,7 +14,7 @@ class PhysiciansController < ApplicationController
     end
 
     unless current_user
-      @current_user = User.find(6)
+      @current_user = User.find_by_email("guest@guest.com")
     end
 
     # @physicians = Physician.all
