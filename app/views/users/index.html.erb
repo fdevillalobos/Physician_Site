@@ -13,4 +13,9 @@
       </table>
     </div>
   </div>
+  <div>
+    <%= link_to t('.new', :default => t("helpers.links.new")),
+                new_user_registration_path,
+                :class => 'btn btn-primary' %>
+  </div>
 </div>

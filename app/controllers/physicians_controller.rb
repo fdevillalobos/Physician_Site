@@ -13,6 +13,10 @@ class PhysiciansController < ApplicationController
       @physicians = Physician.all.order('name ASC')
     end
 
+    unless current_user
+      @current_user = User.find(6)
+    end
+
     # @physicians = Physician.all
     respond_with(@physicians)
   end

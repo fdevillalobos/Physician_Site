@@ -39,7 +39,7 @@
       <th><%= model_class.human_attribute_name(:group_practice_id) %></th>
       <th><%= model_class.human_attribute_name(:specialties) %></th>
       <th><%= model_class.human_attribute_name(:created_at) %></th>
-      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+      <% if current_user && current_user.admin? %> <th><%=t '.actions', :default => t("helpers.actions") %></th><% end %>
     </tr>
   </thead>
   <tbody>
@@ -61,6 +61,7 @@
         <td><%= physician.group_practice.name unless physician.group_practice.nil? %></td>
         <td><%= physician.specialties.select(:name).map(&:name).join(', ') %></td>
         <td><%= physician.created_at.to_formatted_s(:short) %></td>
+        <% if current_user && current_user.admin?  %>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_physician_path(physician), :class => 'btn btn-default btn-xs' %>
@@ -70,11 +71,14 @@
                       :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
                       :class => 'btn btn-xs btn-danger' %>
         </td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
 </table>
 
+<% if current_user && current_user.admin?  %>
 <%= link_to t('.new', :default => t("helpers.links.new")),
             new_physician_path,
             :class => 'btn btn-primary' %>
+<% end %>

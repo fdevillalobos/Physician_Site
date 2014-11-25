@@ -47,7 +47,7 @@ Rails.application.routes.draw do
   match 'users/:id' => 'users#destroy', :via => :delete, :as => :admin_destroy_user
   resources  :users
 
-  root 'visitors#index'
+  root 'physicians#index'
 
   # commented this out from OmniAuth GitHub!!
   # devise_scope :user do
