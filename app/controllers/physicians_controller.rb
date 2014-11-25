@@ -9,6 +9,9 @@ class PhysiciansController < ApplicationController
       # @search_name = params[:search][:name]
       @physicians = Physician.search(params[:search]) #.order("name ASC")
       flash[:notice] = "Your search returned #{@physicians.size} results"
+    elsif params[:advsearch]
+      @physicians = Physician.advsearch(params[:advsearch]) #.order("name ASC")
+      flash[:notice] = "Your search returned #{@physicians.size} results"
     else
       @physicians = Physician.all.order('name ASC')
     end

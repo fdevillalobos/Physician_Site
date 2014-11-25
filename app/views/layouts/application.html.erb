@@ -35,6 +35,21 @@
     <%= favicon_link_tag 'favicon.ico', :rel => 'shortcut icon' %>
 
     <%= javascript_include_tag "application" %>
+
+    <script>
+        $(document).ready(function() {
+            $('#basic_search').on('click', 'button', function() {
+                $('#basic_search').hide();
+                $('#advanced_search').fadeIn();
+//                alert("button");
+            })
+            $('#advanced_search').on('click', 'button', function () {
+                $('#advanced_search').hide();
+                $('#basic_search').fadeIn();
+            })
+        })
+    </script>
+
   </head>
   <body>
 
