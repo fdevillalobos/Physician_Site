@@ -37,12 +37,11 @@ class Physician < ActiveRecord::Base
 
   def self.advsearch(params)
     # query[:name]
-    @results = Physician.where("name LIKE ? AND country_id LIKE ? AND state_id LIKE ? AND medical_school_id LIKE ? AND gender_id LIKE ?",
+    where("name LIKE ? AND country_id LIKE ? AND state_id LIKE ? AND medical_school_id LIKE ? AND gender_id LIKE ? AND (residency_hospital_id LIKE ? OR affiliation_hospital_id LIKE ?)",
                                "%#{params[:advsearch]}%", "%#{params[:country][:country_id]}%", "%#{params[:state][:state_id]}%",
-                               "%#{params[:medical_school][:medical_school_id]}%", "%#{params[:gender][:gender_id]}%"
+                               "%#{params[:medical_school][:medical_school_id]}%", "%#{params[:gender][:gender_id]}%",
+                               "%#{params[:hospital][:hospital_id]}%", "%#{params[:hospital][:hospital_id]}%"
     )
-
-    return @results
   end
 
 

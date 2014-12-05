@@ -28,6 +28,7 @@
           <%= collection_select(:state, :state_id, State.all, :id, :name, {prompt: "Select a State"}, {class: 'form-control'}) %>
           <%= collection_select(:medical_school, :medical_school_id, MedicalSchool.all, :id, :name, {prompt: "Select a Medical School"}, {class: 'form-control'}) %>
           <%= collection_select(:gender, :gender_id, Gender.all, :id, :sex, {prompt: "Select a Gender"}, {class: 'form-control'}) %>
+          <%= collection_select(:hospital, :hospital_id, Hospital.all, :id, :name, {prompt: "Select a Hospital"}, {class: 'form-control'}) %>
           <%= submit_tag "Search", :name => nil, class: "btn btn-default", style:"margin-left:10px" %>
       <% end %>
     </form>
