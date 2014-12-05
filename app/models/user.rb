@@ -33,7 +33,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, :omniauth_providers => [:facebook]
 
-  devise :confirmable
+  # devise :confirmable
 
   has_many :reviews
 

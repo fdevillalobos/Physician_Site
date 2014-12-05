@@ -1,5 +1,6 @@
 class ReviewsController < ApplicationController
   before_action :set_review, only: [:show, :edit, :update, :destroy]
+  before_action :set_guest
 
   respond_to :html
 
@@ -42,11 +43,17 @@ class ReviewsController < ApplicationController
   end
 
   private
-    def set_review
-      @review = Review.find(params[:id])
-    end
+  def set_review
+    @review = Review.find(params[:id])
+  end
 
-    def review_params
-      params.require(:review).permit(:overall_score, :comment, :user_id, :physician_id)
+  def set_guest
+    unless current_user
+      @current_user = User.find_by_email("guest@guest.com")
     end
+  end
+
+  def review_params
+    params.require(:review).permit(:overall_score, :comment, :user_id, :physician_id)
+  end
 end

@@ -1,6 +1,7 @@
 class PhysiciansController < ApplicationController
   # before_filter :authenticate_user!
   before_action :set_physician, only: [:show, :edit, :update, :destroy]
+  before_action :set_guest
 
   respond_to :html
 
@@ -14,10 +15,6 @@ class PhysiciansController < ApplicationController
       flash[:notice] = "Your search returned #{@physicians.size} results"
     else
       @physicians = Physician.all.order('name ASC')
-    end
-
-    unless current_user
-      @current_user = User.find_by_email("guest@guest.com")
     end
 
     # @physicians = Physician.all
@@ -60,6 +57,12 @@ class PhysiciansController < ApplicationController
   private
     def set_physician
       @physician = Physician.find(params[:id])
+    end
+
+    def set_guest
+      unless current_user
+        @current_user = User.find_by_email("guest@guest.com")
+      end
     end
 
     def physician_params
