@@ -35,17 +35,14 @@ class Physician < ActiveRecord::Base
     return @no_join + @join
   end
 
-  def self.advsearch(query)
+  def self.advsearch(params)
     # query[:name]
-    # where("name LIKE ? OR country_id LIKE ?", "%#{query}%", "%#{query}%")
-    # Physician.joins(:country).where("countries.name like ?", country)
-    # joins(:country).where("countries.name like ? or physicians.name LIKE ?", "%#{query}%", "%#{query}%")
+    @results = Physician.where("name LIKE ? AND country_id LIKE ? AND state_id LIKE ? AND medical_school_id LIKE ? AND gender_id LIKE ?",
+                               "%#{params[:advsearch]}%", "%#{params[:country][:country_id]}%", "%#{params[:state][:state_id]}%",
+                               "%#{params[:medical_school][:medical_school_id]}%", "%#{params[:gender][:gender_id]}%"
+    )
 
-    @no_join = Physician.where("name LIKE ? OR NPI LIKE ? OR phone LIKE ?", "%#{query}%", "%#{query}%", "%#{query}%")
-    @join = Physician.joins(:country, :state, :medical_school, :gender, :credential, :group_practice, :residency_hospital, :affiliation_hospital, :specialties)
-                .where("countries.name LIKE ? OR states.name LIKE ? OR medical_schools.name LIKE ? OR genders.sex LIKE ? OR credentials.name LIKE ? OR group_practices.name LIKE ? OR hospitals.name LIKE ? OR affiliation_hospitals_physicians.name LIKE ? OR specialties.name LIKE ?",
-                       "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%")
-    return @no_join + @join
+    return @results
   end
 
 

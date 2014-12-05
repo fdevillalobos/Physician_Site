@@ -10,15 +10,24 @@ class PhysiciansController < ApplicationController
       # @search_name = params[:search][:name]
       @physicians = Physician.search(params[:search]) #.order("name ASC")
       flash[:notice] = "Your search returned #{@physicians.size} results"
+      respond_with(@physicians)
     elsif params[:advsearch]
-      @physicians = Physician.advsearch(params[:advsearch]) #.order("name ASC")
+      redirect_to action: :adv_search, params: params
+    else
+      @physicians = Physician.all.order('name ASC')
+      respond_with(@physicians)
+    end
+
+  end
+
+  def adv_search
+    if params[:advsearch]
+      @physicians = Physician.advsearch(params)
       flash[:notice] = "Your search returned #{@physicians.size} results"
     else
       @physicians = Physician.all.order('name ASC')
     end
-
-    # @physicians = Physician.all
-    respond_with(@physicians)
+    render :index
   end
 
   def show
