@@ -21,4 +21,8 @@ class UsersController < ApplicationController
     end
   end
 
+  def create
+    super
+  end
+
 end

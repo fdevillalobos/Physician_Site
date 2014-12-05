@@ -1,45 +1,68 @@
 # == Route Map
 #
-#                   Prefix Verb     URI Pattern                            Controller#Action
-#               physicians GET      /physicians(.:format)                  physicians#index
-#                          POST     /physicians(.:format)                  physicians#create
-#            new_physician GET      /physicians/new(.:format)              physicians#new
-#           edit_physician GET      /physicians/:id/edit(.:format)         physicians#edit
-#                physician GET      /physicians/:id(.:format)              physicians#show
-#                          PATCH    /physicians/:id(.:format)              physicians#update
-#                          PUT      /physicians/:id(.:format)              physicians#update
-#                          DELETE   /physicians/:id(.:format)              physicians#destroy
-#         new_user_session GET      /users/sign_in(.:format)               devise/sessions#new
-#             user_session POST     /users/sign_in(.:format)               devise/sessions#create
-#     destroy_user_session DELETE   /users/sign_out(.:format)              devise/sessions#destroy
-#  user_omniauth_authorize GET|POST /users/auth/:provider(.:format)        users/omniauth_callbacks#passthru {:provider=>/facebook/}
-#   user_omniauth_callback GET|POST /users/auth/:action/callback(.:format) users/omniauth_callbacks#:action
-#            user_password POST     /users/password(.:format)              devise/passwords#create
-#        new_user_password GET      /users/password/new(.:format)          devise/passwords#new
-#       edit_user_password GET      /users/password/edit(.:format)         devise/passwords#edit
-#                          PATCH    /users/password(.:format)              devise/passwords#update
-#                          PUT      /users/password(.:format)              devise/passwords#update
-# cancel_user_registration GET      /users/cancel(.:format)                devise/registrations#cancel
-#        user_registration POST     /users(.:format)                       devise/registrations#create
-#    new_user_registration GET      /users/sign_up(.:format)               devise/registrations#new
-#   edit_user_registration GET      /users/edit(.:format)                  devise/registrations#edit
-#                          PATCH    /users(.:format)                       devise/registrations#update
-#                          PUT      /users(.:format)                       devise/registrations#update
-#                          DELETE   /users(.:format)                       devise/registrations#destroy
-#       admin_destroy_user DELETE   /users/:id(.:format)                   users#destroy
-#                    users GET      /users(.:format)                       users#index
-#                          POST     /users(.:format)                       users#create
-#                 new_user GET      /users/new(.:format)                   users#new
-#                edit_user GET      /users/:id/edit(.:format)              users#edit
-#                     user GET      /users/:id(.:format)                   users#show
-#                          PATCH    /users/:id(.:format)                   users#update
-#                          PUT      /users/:id(.:format)                   users#update
-#                          DELETE   /users/:id(.:format)                   users#destroy
-#                     root GET      /                                      visitors#index
+#                   Prefix Verb     URI Pattern                                          Controller#Action
+#                  reviews GET      /reviews(.:format)                                   reviews#index
+#                          POST     /reviews(.:format)                                   reviews#create
+#               new_review GET      /reviews/new(.:format)                               reviews#new
+#              edit_review GET      /reviews/:id/edit(.:format)                          reviews#edit
+#                   review GET      /reviews/:id(.:format)                               reviews#show
+#                          PATCH    /reviews/:id(.:format)                               reviews#update
+#                          PUT      /reviews/:id(.:format)                               reviews#update
+#                          DELETE   /reviews/:id(.:format)                               reviews#destroy
+#        physician_reviews GET      /physicians/:physician_id/reviews(.:format)          reviews#index
+#                          POST     /physicians/:physician_id/reviews(.:format)          reviews#create
+#     new_physician_review GET      /physicians/:physician_id/reviews/new(.:format)      reviews#new
+#    edit_physician_review GET      /physicians/:physician_id/reviews/:id/edit(.:format) reviews#edit
+#         physician_review GET      /physicians/:physician_id/reviews/:id(.:format)      reviews#show
+#                          PATCH    /physicians/:physician_id/reviews/:id(.:format)      reviews#update
+#                          PUT      /physicians/:physician_id/reviews/:id(.:format)      reviews#update
+#                          DELETE   /physicians/:physician_id/reviews/:id(.:format)      reviews#destroy
+#               physicians GET      /physicians(.:format)                                physicians#index
+#                          POST     /physicians(.:format)                                physicians#create
+#            new_physician GET      /physicians/new(.:format)                            physicians#new
+#           edit_physician GET      /physicians/:id/edit(.:format)                       physicians#edit
+#                physician GET      /physicians/:id(.:format)                            physicians#show
+#                          PATCH    /physicians/:id(.:format)                            physicians#update
+#                          PUT      /physicians/:id(.:format)                            physicians#update
+#                          DELETE   /physicians/:id(.:format)                            physicians#destroy
+#         new_user_session GET      /users/sign_in(.:format)                             devise/sessions#new
+#             user_session POST     /users/sign_in(.:format)                             devise/sessions#create
+#     destroy_user_session DELETE   /users/sign_out(.:format)                            devise/sessions#destroy
+#  user_omniauth_authorize GET|POST /users/auth/:provider(.:format)                      users/omniauth_callbacks#passthru {:provider=>/facebook/}
+#   user_omniauth_callback GET|POST /users/auth/:action/callback(.:format)               users/omniauth_callbacks#:action
+#            user_password POST     /users/password(.:format)                            devise/passwords#create
+#        new_user_password GET      /users/password/new(.:format)                        devise/passwords#new
+#       edit_user_password GET      /users/password/edit(.:format)                       devise/passwords#edit
+#                          PATCH    /users/password(.:format)                            devise/passwords#update
+#                          PUT      /users/password(.:format)                            devise/passwords#update
+# cancel_user_registration GET      /users/cancel(.:format)                              devise/registrations#cancel
+#        user_registration POST     /users(.:format)                                     devise/registrations#create
+#    new_user_registration GET      /users/sign_up(.:format)                             devise/registrations#new
+#   edit_user_registration GET      /users/edit(.:format)                                devise/registrations#edit
+#                          PATCH    /users(.:format)                                     devise/registrations#update
+#                          PUT      /users(.:format)                                     devise/registrations#update
+#                          DELETE   /users(.:format)                                     devise/registrations#destroy
+#        user_confirmation POST     /users/confirmation(.:format)                        devise/confirmations#create
+#    new_user_confirmation GET      /users/confirmation/new(.:format)                    devise/confirmations#new
+#                          GET      /users/confirmation(.:format)                        devise/confirmations#show
+#       admin_destroy_user DELETE   /users/:id(.:format)                                 users#destroy
+#                    users GET      /users(.:format)                                     users#index
+#                          POST     /users(.:format)                                     users#create
+#                 new_user GET      /users/new(.:format)                                 users#new
+#                edit_user GET      /users/:id/edit(.:format)                            users#edit
+#                     user GET      /users/:id(.:format)                                 users#show
+#                          PATCH    /users/:id(.:format)                                 users#update
+#                          PUT      /users/:id(.:format)                                 users#update
+#                          DELETE   /users/:id(.:format)                                 users#destroy
+#                     root GET      /                                                    physicians#index
 #
 
 Rails.application.routes.draw do
-  resources :physicians
+  resources :reviews
+
+  resources :physicians do
+    resources :reviews, shallow: true
+  end
 
   # devise_for :users, controllers: {registrations: 'registrations'}    # The second one is the name of MY controller.
   # commented above, and put in below line from OmniAuth's GitHub https://github.com/plataformatec/devise/wiki/OmniAuth:-Overview

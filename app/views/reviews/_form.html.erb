@@ -1,0 +1,69 @@
+<%= form_for @review, :html => { :class => "form-horizontal review" } do |f| %>
+
+    <% if @review.errors.any? %>
+        <div id="error_expl" class="panel panel-danger">
+          <div class="panel-heading">
+            <h3 class="panel-title"><%= pluralize(@review.errors.count, "error") %> prohibited this review from being saved:</h3>
+          </div>
+          <div class="panel-body">
+            <ul>
+              <% @review.errors.full_messages.each do |msg| %>
+                  <li><%= msg %></li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+    <% end %>
+
+    <div class="control-group">
+      <%= f.label :overall_score, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.select(:overall_score, options_for_select([['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5]]), {}, {class: "form-control"}) %>
+      </div>
+      <%= error_span(@review[:overall_score]) %>
+    </div>
+    <div class="control-group">
+      <%= f.label :comment, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_area :comment, :class => 'form-control' %>
+      </div>
+      <%= error_span(@review[:comment]) %>
+    </div>
+
+    <% unless params.has_key?(:physician_id) %>
+        <div class="control-group">
+          <%= f.label :physician_id, :class => 'control-label' %>
+          <div class="controls">
+            <%= f.collection_select :physician_id, Physician.all, :id, :name, {prompt: "Select a Physician"}, {class: 'form-control'} %>
+          </div>
+          <%= error_span(@review[:physician_id]) %>
+        </div>
+    <% end %>
+    <% if params.has_key?(:physician_id) %>
+        <div class="control-group">
+          <%= f.label :physician_id, :class => 'control-label' %>
+          <div class="controls">
+            <%= f.select(:physician_id, options_for_select([[Physician.find(params[:physician_id]).name, Physician.find(params[:physician_id]).id]]), {}, {class: "form-control"}) %>
+          </div>
+          <%= error_span(@review[:physician_id]) %>
+        </div>
+    <% end %>
+
+    <div class="control-group">
+      <%= f.label :user_id, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.select(:user_id, options_for_select([[current_user.name, current_user.id]]), {}, {class: "form-control"}) %>
+      </div>
+      <%= error_span(@review[:overall_score]) %>
+    </div>
+
+    <div style= "margin: 10px 0px 10px 0px ">
+      Review by: <%= current_user.name %>
+    </div>
+
+
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                reviews_path, :class => 'btn btn-default' %>
+
+<% end %>

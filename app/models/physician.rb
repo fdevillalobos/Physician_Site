@@ -62,6 +62,8 @@ class Physician < ActiveRecord::Base
   belongs_to :residency_hospital, class_name: "Hospital"
   belongs_to :affiliation_hospital, class_name: "Hospital"
 
+  has_many :reviews
+
   # Validations
   validates_presence_of :gender_id, :credential_id, :name
   validates_uniqueness_of :email
