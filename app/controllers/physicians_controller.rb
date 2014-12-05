@@ -25,6 +25,7 @@ class PhysiciansController < ApplicationController
   end
 
   def show
+    @physician = Physician.find(params[:id])
     respond_with(@physician)
   end
 
