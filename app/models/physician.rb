@@ -35,6 +35,15 @@ class Physician < ActiveRecord::Base
     return @no_join + @join
   end
 
+  def self.advsearch(params)
+    # query[:name]
+    where("name LIKE ? AND country_id LIKE ? AND state_id LIKE ? AND medical_school_id LIKE ? AND gender_id LIKE ? AND (residency_hospital_id LIKE ? OR affiliation_hospital_id LIKE ?)",
+                               "%#{params[:advsearch]}%", "%#{params[:country][:country_id]}%", "%#{params[:state][:state_id]}%",
+                               "%#{params[:medical_school][:medical_school_id]}%", "%#{params[:gender][:gender_id]}%",
+                               "%#{params[:hospital][:hospital_id]}%", "%#{params[:hospital][:hospital_id]}%"
+    )
+  end
+
 
   # We changed everything to belongs_to because has_one or has_many were not working.
   belongs_to :country
@@ -48,6 +57,8 @@ class Physician < ActiveRecord::Base
   # REFERENCING TWO COLUMNS IN THE SAME TABLE TO TWO DIFFERENT OBJECTS IN ANOTHER TABLE
   belongs_to :residency_hospital, class_name: "Hospital"
   belongs_to :affiliation_hospital, class_name: "Hospital"
+
+  has_many :reviews
 
   # Validations
   validates_presence_of :gender_id, :credential_id, :name

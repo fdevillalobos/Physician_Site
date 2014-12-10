@@ -19,6 +19,9 @@
 #  admin                  :boolean
 #  provider               :string(255)
 #  uid                    :string(255)
+#  confirmation_token     :string(255)
+#  confirmed_at           :datetime
+#  confirmation_sent_at   :datetime
 #
 
 FactoryGirl.define do

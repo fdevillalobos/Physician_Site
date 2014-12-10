@@ -34,12 +34,19 @@
   <dd><%= @physician.specialties.select(:name).map(&:name).join(', ') %></dd>
 </dl>
 
+<%= render :partial => 'reviews' %>
+
 <%= link_to t('.back', :default => t("helpers.links.back")),
               physicians_path, :class => 'btn btn-default'  %>
 <%= link_to t('.edit', :default => t("helpers.links.edit")),
               edit_physician_path(@physician), :class => 'btn btn-default' %>
+<%= link_to "New Review", new_physician_review_path(@physician), :class => 'btn btn-default' %>
+
+
+<% if current_user && current_user.admin?  %>
 <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
               physician_path(@physician),
               :method => 'delete',
               :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
               :class => 'btn btn-danger' %>
+<% end %>

@@ -1,0 +1,14 @@
+%h3= 'Reviews for ' + @physician.name
+
+%table.table.table-striped
+  %thead
+    %tr
+      %th Comment
+      %th Overall Score
+      %th User
+
+  -@physician.reviews.each do |review|
+    %tr
+      %td= review.comment
+      %td= review.overall_score
+      %td= User.find(review.user_id).name
