@@ -39,13 +39,13 @@ end
 # Gender
 sex_list = [['Male'], ['Female'], ['Other']]
 sex_list.each do |gender|
-  Gender.create ( sex: gender )
+  Gender.create( sex: gender )
 end
 
 # Group Practice
 group_list = [['Philly Practice'], ['NY Partners'], ['Pennsylvania Surgeons']]
 group_list.each do |group|
-  GroupPractice.create ( name: group )
+  GroupPractice.create( name: group )
 end
 
 # Hospitals
@@ -54,7 +54,7 @@ hospital_list = [
     ['Eastern Virginia Medical School']
 ]
 hospital_list.each do |hosp|
-  Hospital.create ( name: hosp )
+  Hospital.create( name: hosp )
 end
 
 # Medical School
@@ -64,7 +64,7 @@ school_list = [
     ['The University of Texas']
 ]
 school_list.each do |school|
-  MedicalSchool.create ( name: school )
+  MedicalSchool.create( name: school )
 end
 
 # Months
@@ -72,7 +72,7 @@ month_list = [['January'], ['February'], ['March'], ['April'], ['June'], ['July'
               ['August'], ['September'], ['October'], ['November'], ['December']
 ]
 month_list.each do |month|
-  Month.create ( name: month )
+  Month.create( name: month )
 end
 
 # Specialites
@@ -82,7 +82,7 @@ specialty_list = [
     ['Pediatrician']
 ]
 specialty_list.each do |special|
-  Specialty.create ( name: special )
+  Specialty.create( name: special )
 end
 
 # States
@@ -139,6 +139,6 @@ state_list = [
     ['Wyoming']
 ]
 state_list.each do |state|
-  State.create ( name: state )
+  State.create( name: state )
 end
 
