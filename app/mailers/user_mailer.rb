@@ -5,19 +5,20 @@ class UserMailer < Devise::Mailer
 
   # default from: "physician@friends.com"
 
-  def confirmation_email(user)
-    @user = user
-    @url  = 'www.facebook.com'
-    mail(to: @user.email, subject: 'Please Confirm Your Email Address')
-  end
+  # def confirmation_email(user)
+  #   @user = user
+  #   @url  = 'www.facebook.com'
+  #   mail(to: @user.email, subject: 'Please Confirm Your Email Address')
+  # end
 
-  def confirmation_instructions(record, token, opts={}, user)
+  def confirmation_instructions(record, token, opts={})
+
+    @name = record.name
     headers["Custom-header"] = "Bar"
-    opts[:from]     = 'my_custom_from@domain.com'
-    opts[:reply_to] = 'my_custom_from@domain.com'
+    opts[:from]     = 'frommy_custom_from@domain.com'
+    opts[:reply_to] = 'replymy_custom_from@domain.com'
     opts[:subject]  = 'Please Confirm Your Email Address'
     @url  = 'www.physicianfriends.com'
-    # @user = user
     super
   end
 
