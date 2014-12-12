@@ -20,10 +20,10 @@ puts 'CREATED GUEST USER: ' << user.email
 # Seed tables
 # Country
 country_list = [
-    [ "United States"],
-    [ "Canada"],
-    [ "Mexico"],
-    [ "Argentina"]
+    ['United States'],
+    ['Canada'],
+    ['Mexico'],
+    ['Argentina']
 ]
 
 country_list.each do |name|
