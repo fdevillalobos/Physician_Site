@@ -11,12 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141204200736) do
+ActiveRecord::Schema.define(version: 20141212233746) do
 
   create_table "countries", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "iso"
   end
 
   create_table "credentials", force: true do |t|
@@ -124,7 +125,11 @@ ActiveRecord::Schema.define(version: 20141204200736) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "iso"
+    t.integer  "country_id"
   end
+
+  add_index "states", ["country_id"], name: "index_states_on_country_id"
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false

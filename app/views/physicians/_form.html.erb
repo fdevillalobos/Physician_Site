@@ -1,3 +1,4 @@
+<%= javascript_include_tag "application" %>
 <%= form_for @physician, :html => { :class => "form-horizontal physician" } do |f| %>
 
     <% if @physician.errors.any? %>
@@ -39,7 +40,7 @@
   <div class="control-group">
     <%= f.label :state_id, :class => 'control-label' %>
     <div class="controls">
-      <%= f.collection_select :state_id, State.all, :id, :name, {prompt: "Select a State"}, {class: 'form-control'} %>
+      <%= f.grouped_collection_select :state_id, Country.all, :states, :name, :id, :name, {prompt: "Select a State"}, {class: 'form-control'} %>
     </div>
     <%= error_span(@physician[:state_id]) %>
   </div>
