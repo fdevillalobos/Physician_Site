@@ -20,14 +20,15 @@ puts 'CREATED GUEST USER: ' << user.email
 # Seed tables
 
 # Credentials
+Credential.delete_all
 credential_list = ['MD', 'DO']
-
 credential_list.each do |cred|
   Credential.create( name: cred )
   puts 'Created credential: ' << cred
 end
 
 # Gender
+Gender.delete_all
 sex_list = ['Male', 'Female', 'Other']
 sex_list.each do |gender|
   Gender.create( sex: gender )
@@ -35,6 +36,7 @@ sex_list.each do |gender|
 end
 
 # Group Practice
+GroupPractice.delete_all
 group_list = ['Philly Practice', 'NY Partners', 'Pennsylvania Surgeons']
 group_list.each do |group|
   GroupPractice.create( name: group )
@@ -42,6 +44,7 @@ group_list.each do |group|
 end
 
 # Hospitals
+Hospital.delete_all
 hospital_list = [
     'Penn Presbyterian Medical Center',
     'Eastern Virginia Medical School'
@@ -52,6 +55,7 @@ hospital_list.each do |hosp|
 end
 
 # Medical School
+MedicalSchool.delete_all
 school_list = [
     'University of Pennsylvania',
     'University of Iowa',
@@ -63,6 +67,7 @@ school_list.each do |school|
 end
 
 # Months
+Month.delete_all
 month_list = ['January', 'February', 'March', 'April', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 month_list.each do |month|
   Month.create( name: month )
@@ -70,6 +75,7 @@ month_list.each do |month|
 end
 
 # Specialites
+Specialty.delete_all
 specialty_list = [
     'Neurosurgery',
     'Family Medicine',
@@ -79,79 +85,6 @@ specialty_list.each do |special|
   Specialty.create( name: special )
   puts 'Created specialty: ' << special
 end
-
-# Country
-# country_list = ['United States', 'Canada', 'Mexico', 'Argentina']
-# country_list.each do |cname|
-#   Country.create( name: cname )
-#   puts 'Created country: ' << cname
-# end
-
-# States
-# state_list = [
-#     'Alabama',
-#     'Alaska',
-#     'Arizona',
-#     'Arkansas',
-#     'California',
-#     'Colorado ',
-#     'Connecticut',
-#     'Delaware',
-#     'Florida',
-#     'Georgia',
-#     'Hawaii',
-#     'Idaho',
-#     'Illinois',
-#     'Indiana',
-#     'Iowa',
-#     'Kansas',
-#     'Kentucky',
-#     'Louisiana',
-#     'Maine',
-#     'Maryland',
-#     'Massachusetts',
-#     'Michigan',
-#     'Minnesota',
-#     'Mississippi',
-#     'Missouri',
-#     'Montana',
-#     'Nebraska',
-#     'Nevada',
-#     'New Hampshire',
-#     'New Jersey',
-#     'New Mexico',
-#     'New York',
-#     'North Carolina',
-#     'North Dakota',
-#     'Ohio',
-#     'Oklahoma',
-#     'Oregon',
-#     'Pennsylvania',
-#     'Rhode Island',
-#     'South Carolina',
-#     'South Dakota',
-#     'Tennessee',
-#     'Texas',
-#     'Utah',
-#     'Vermont',
-#     'Virginia',
-#     'Washington',
-#     'West Virginia',
-#     'Wisconsin',
-#     'Wyoming'
-# ]
-# state_list.each do |state|
-#   State.create( name: state )
-#   puts 'Created state: ' << state
-# end
-
-
-
-
-
-
-
-
 
 
 
