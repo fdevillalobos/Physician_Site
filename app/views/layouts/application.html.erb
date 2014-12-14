@@ -36,22 +36,6 @@
 
     <%= javascript_include_tag "application" %>
 
-    <script>
-        $(document).ready(function() {
-            $('#basic_search').on('click', 'button', function(event) {
-//                event.preventDefault();
-                $('#basic_search').hide();
-                $('#advanced_search').fadeIn();
-//                alert("button");
-            })
-            $('#advanced_search').on('click', 'button', function (event) {
-//                event.preventDefault();
-                $('#advanced_search').hide();
-                $('#basic_search').fadeIn();
-            })
-        })
-    </script>
-
   </head>
   <body>
 

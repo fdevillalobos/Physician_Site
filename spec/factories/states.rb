@@ -6,6 +6,8 @@
 #  name       :string(255)
 #  created_at :datetime
 #  updated_at :datetime
+#  iso        :string(255)
+#  country_id :integer
 #
 
 FactoryGirl.define do

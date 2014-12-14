@@ -23,25 +23,42 @@
 class Physician < ActiveRecord::Base
 
   def self.search(query)
-    # query[:name]
-    # where("name LIKE ? OR country_id LIKE ?", "%#{query}%", "%#{query}%")
-    # Physician.joins(:country).where("countries.name like ?", country)
-    # joins(:country).where("countries.name like ? or physicians.name LIKE ?", "%#{query}%", "%#{query}%")
+    if Rails.env.development?
+      # query[:name]
+      # where("name LIKE ? OR country_id LIKE ?", "%#{query}%", "%#{query}%")
+      # Physician.joins(:country).where("countries.name like ?", country)
+      # joins(:country).where("countries.name like ? or physicians.name LIKE ?", "%#{query}%", "%#{query}%")
 
-    @no_join = Physician.where("name LIKE ? OR NPI LIKE ? OR phone LIKE ?", "%#{query}%", "%#{query}%", "%#{query}%")
-    @join = Physician.joins(:country, :state, :medical_school, :gender, :credential, :group_practice, :residency_hospital, :affiliation_hospital, :specialties)
+      @no_join = Physician.where("name LIKE ? OR NPI LIKE ? OR phone LIKE ?", "%#{query}%", "%#{query}%", "%#{query}%")
+      @join = Physician.joins(:country, :state, :medical_school, :gender, :credential, :group_practice, :residency_hospital, :affiliation_hospital, :specialties)
                 .where("countries.name LIKE ? OR states.name LIKE ? OR medical_schools.name LIKE ? OR genders.sex LIKE ? OR credentials.name LIKE ? OR group_practices.name LIKE ? OR hospitals.name LIKE ? OR affiliation_hospitals_physicians.name LIKE ? OR specialties.name LIKE ?",
                        "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%")
+    else
+      @no_join = Physician.where("name LIKE ? OR CAST('NPI' AS TEXT) LIKE ? OR CAST(phone AS TEXT) LIKE ?", "%#{query}%", "%#{query}%", "%#{query}%")
+      @join = Physician.joins(:country, :state, :medical_school, :gender, :credential, :group_practice, :residency_hospital, :affiliation_hospital, :specialties)
+                  .where("countries.name LIKE ? OR states.name LIKE ? OR medical_schools.name LIKE ? OR genders.sex LIKE ? OR credentials.name LIKE ? OR group_practices.name LIKE ? OR hospitals.name LIKE ? OR affiliation_hospitals_physicians.name LIKE ? OR specialties.name LIKE ?",
+                         "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%")
+    end
+
     return @no_join + @join
   end
 
   def self.advsearch(params)
-    # query[:name]
-    where("name LIKE ? AND country_id LIKE ? AND state_id LIKE ? AND medical_school_id LIKE ? AND gender_id LIKE ? AND (residency_hospital_id LIKE ? OR affiliation_hospital_id LIKE ?)",
+    if Rails.env.development?
+      where("name LIKE ? AND country_id LIKE ? AND state_id LIKE ? AND medical_school_id LIKE ? AND gender_id LIKE ? AND \
+(residency_hospital_id LIKE ? OR affiliation_hospital_id LIKE ?)",
                                "%#{params[:advsearch]}%", "%#{params[:country][:country_id]}%", "%#{params[:state][:state_id]}%",
                                "%#{params[:medical_school][:medical_school_id]}%", "%#{params[:gender][:gender_id]}%",
                                "%#{params[:hospital][:hospital_id]}%", "%#{params[:hospital][:hospital_id]}%"
-    )
+      )
+    else
+      where("name LIKE ? AND CAST(country_id AS TEXT) LIKE ? AND CAST(state_id AS TEXT) LIKE ? AND CAST(medical_school_id AS TEXT) \
+LIKE ? AND CAST(gender_id AS TEXT) LIKE ? AND (CAST(residency_hospital_id AS TEXT) LIKE ? OR CAST(affiliation_hospital_id AS TEXT) LIKE ?)",
+            "%#{params[:advsearch]}%", "%#{params[:country][:country_id]}%", "%#{params[:state][:state_id]}%",
+            "%#{params[:medical_school][:medical_school_id]}%", "%#{params[:gender][:gender_id]}%",
+            "%#{params[:hospital][:hospital_id]}%", "%#{params[:hospital][:hospital_id]}%"
+      )
+    end
   end
 
 

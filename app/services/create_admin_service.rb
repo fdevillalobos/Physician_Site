@@ -5,6 +5,7 @@ class CreateAdminService
         user.password_confirmation = Rails.application.secrets.admin_password
         user.name = Rails.application.secrets.admin_name
         user.admin = true
+        user.confirmed_at = DateTime.now
     end
   end
 end
