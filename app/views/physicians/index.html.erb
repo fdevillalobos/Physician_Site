@@ -75,7 +75,7 @@
         <td><%= physician.state.name unless physician.state.nil? %></td>
         <td><%= physician.medical_school.name unless physician.medical_school.nil? %></td>
         <td><%= physician.NPI %></td>
-        <td><%= physician.gender.sex %></td>
+        <td><%= physician.gender.sex unless physician.sex.nil? %></td>
         <td><%= physician.birth %></td>
         <td><%= physician.phone %></td>
         <td><%= physician.residency_hospital.name unless physician.residency_hospital.nil? %></td>
