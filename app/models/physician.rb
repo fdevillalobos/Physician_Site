@@ -18,6 +18,11 @@
 #  affiliation_hospital_id :integer
 #  credential_id           :integer
 #  group_practice_id       :integer
+#  latitude                :float
+#  longitude               :float
+#  street                  :text
+#  suite                   :text
+#  city                    :text
 #
 
 class Physician < ActiveRecord::Base
@@ -84,4 +89,12 @@ LIKE ? AND CAST(gender_id AS TEXT) LIKE ? AND (CAST(residency_hospital_id AS TEX
   validates_uniqueness_of :email
   # Fairly nice Regex email validator that will ensure that your email has the correct formatting and at least could exist.
   validates_format_of :email, :with => /[a-z0-9!#$%&'*+\/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+\/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+(?:[A-Z]{2}|com|org|net|edu|gov|mil|biz|info|mobi|name|aero|asia|jobs|museum)\b/, :on => :create
+  # Geocoder for Google Maps
+  geocoded_by :address   # can also be an IP address
+  after_validation :geocode          # auto-fetch coordinates
+
+  def address
+    [street, city, state.name, country.name].compact.join(', ')
+  end
+
 end

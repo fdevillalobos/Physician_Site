@@ -34,6 +34,11 @@ class PhysiciansController < ApplicationController
 
   def show
     @physician = Physician.find(params[:id])
+    @hash = Gmaps4rails.build_markers(@physician) do |physician, marker|
+      marker.lat physician.latitude
+      marker.lng physician.longitude
+    end
+    puts @hash
     respond_with(@physician)
   end
 

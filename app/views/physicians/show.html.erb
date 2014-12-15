@@ -32,7 +32,36 @@
   <dd><%= @physician.group_practice.name unless @physician.group_practice.nil? %></dd>
   <dt><strong><%= model_class.human_attribute_name(:specialties) %>:</strong></dt>
   <dd><%= @physician.specialties.select(:name).map(&:name).join(', ') %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:latitude) %>:</strong></dt>
+  <dd><%= @physician.latitude %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:longitude) %>:</strong></dt>
+  <dd><%= @physician.longitude %></dd>
 </dl>
+
+<!--Google Maps Javascript-->
+<script type="text/javascript">
+    handler = Gmaps.build('Google');
+    handler.buildMap({
+                provider: {
+                    disableDefaultUI: false
+                    // pass in other Google Maps API options here
+                },
+                internal: {
+                    id: 'map'
+                }
+            },
+            function(){
+                markers = handler.addMarkers(<%=raw @hash.to_json %>);
+                handler.bounds.extendWith(markers);
+                handler.fitMapToBounds();
+            });
+    handler.zoom(5)
+</script>
+
+<!--Google Maps API Gem-->
+<div style='width: 800px;'>
+  <div id="map" style='width: 800px; height: 400px;'></div>
+</div>
 
 <%= render :partial => 'reviews' %>
 
