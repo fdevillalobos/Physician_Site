@@ -22,7 +22,7 @@ class PhysiciansController < ApplicationController
 
   def adv_search
     if params[:advsearch]
-      @physicians = Physician.advsearch(params).order("name ASC")
+      @physicians = Physician.advsearch(params).order("physicians.name ASC")
       flash[:notice] = "Your search returned #{@physicians.size} results"
     else
       @physicians = Physician.all.order('name ASC')
