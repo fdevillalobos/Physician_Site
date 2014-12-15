@@ -26,6 +26,7 @@
     <form class="form-inline" style="width:500px">
       <%= form_tag({controller: 'physicians', action: 'adv_search'}, :method => "get", id: "advsearch-form") do %>
           <%= text_field_tag :advsearch, params[:advsearch], class: "form-control", style:"width:300px", placeholder: "Physician name, surname or NPI"%>
+          <%= text_field_tag :specialtysearch, params[:specialtysearch], class: "form-control", style:"width:300px", placeholder: "Specialty, conditions treated, or procedures performed"%>
           <%= collection_select(:country, :country_id, Country.all, :id, :name, {prompt: "Select a Country"}, {class: 'form-control'}) %>
           <%= collection_select(:state, :state_id, State.all, :id, :name, {prompt: "Select a State"}, {class: 'form-control'}) %>
           <%= collection_select(:medical_school, :medical_school_id, MedicalSchool.all, :id, :name, {prompt: "Select a Medical School"}, {class: 'form-control'}) %>
