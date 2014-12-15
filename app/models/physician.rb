@@ -40,7 +40,7 @@ class Physician < ActiveRecord::Base
                          "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%")
     end
 
-    return @no_join + @join
+    return (@no_join + @join).uniq #there has got to be a better and faster way of getting a unique answer to the user's query
   end
 
   def self.advsearch(params)
