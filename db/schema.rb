@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141212233746) do
+ActiveRecord::Schema.define(version: 20141214232516) do
 
   create_table "countries", force: true do |t|
     t.string   "name"
@@ -84,6 +84,11 @@ ActiveRecord::Schema.define(version: 20141212233746) do
     t.integer  "affiliation_hospital_id"
     t.integer  "credential_id"
     t.integer  "group_practice_id"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.text     "street"
+    t.text     "suite"
+    t.text     "city"
   end
 
   add_index "physicians", ["affiliation_hospital_id"], name: "index_physicians_on_affiliation_hospital_id"

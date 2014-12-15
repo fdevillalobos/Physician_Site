@@ -18,6 +18,11 @@
 #  affiliation_hospital_id :integer
 #  credential_id           :integer
 #  group_practice_id       :integer
+#  latitude                :float
+#  longitude               :float
+#  street                  :text
+#  suite                   :text
+#  city                    :text
 #
 
 FactoryGirl.define do
