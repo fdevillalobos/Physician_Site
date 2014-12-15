@@ -41,7 +41,7 @@ class Physician < ActiveRecord::Base
     else
       @no_join = Physician.where("name LIKE ? OR CAST('NPI' AS TEXT) LIKE ? OR CAST(phone AS TEXT) LIKE ?", "%#{query}%", "%#{query}%", "%#{query}%")
       @join = Physician.joins(:country, :state, :medical_school, :gender, :credential, :group_practice, :residency_hospital, :affiliation_hospital, :specialties)
-                  .where("countries.name LIKE ? OR states.name LIKE ? OR medical_schools.name LIKE ? OR genders.sex LIKE ? OR credentials.name LIKE ? OR group_practices.name LIKE ? OR hospitals.name LIKE ? OR affiliation_hospitals_physicians.name LIKE ? OR specialties.name LIKE ?",
+                  .where("countries.name ILIKE ? OR states.name ILIKE ? OR medical_schools.name ILIKE ? OR genders.sex ILIKE ? OR credentials.name ILIKE ? OR group_practices.name ILIKE ? OR hospitals.name ILIKE ? OR affiliation_hospitals_physicians.name ILIKE ? OR specialties.name ILIKE ?",
                          "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%")
     end
 
@@ -57,12 +57,12 @@ class Physician < ActiveRecord::Base
                                "%#{params[:hospital][:hospital_id]}%", "%#{params[:hospital][:hospital_id]}%"
       ).joins(:specialties).where("specialties.name LIKE ?", "%#{params[:specialtysearch]}%")
     else
-      where("name LIKE ? AND CAST(country_id AS TEXT) LIKE ? AND CAST(state_id AS TEXT) LIKE ? AND CAST(medical_school_id AS TEXT) \
+      where("name ILIKE ? AND CAST(country_id AS TEXT) LIKE ? AND CAST(state_id AS TEXT) LIKE ? AND CAST(medical_school_id AS TEXT) \
 LIKE ? AND CAST(gender_id AS TEXT) LIKE ? AND (CAST(residency_hospital_id AS TEXT) LIKE ? OR CAST(affiliation_hospital_id AS TEXT) LIKE ?)",
             "%#{params[:advsearch]}%", "%#{params[:country][:country_id]}%", "%#{params[:state][:state_id]}%",
             "%#{params[:medical_school][:medical_school_id]}%", "%#{params[:gender][:gender_id]}%",
             "%#{params[:hospital][:hospital_id]}%", "%#{params[:hospital][:hospital_id]}%"
-      ).joins(:specialties).where("specialties.name LIKE ?", "%#{params[:specialtysearch]}%")
+      ).joins(:specialties).where("specialties.name ILIKE ?", "%#{params[:specialtysearch]}%")
     end
   end
 
