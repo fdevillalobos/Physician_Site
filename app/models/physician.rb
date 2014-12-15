@@ -57,7 +57,7 @@ class Physician < ActiveRecord::Base
                                "%#{params[:hospital][:hospital_id]}%", "%#{params[:hospital][:hospital_id]}%"
       ).joins(:specialties).where("specialties.name LIKE ?", "%#{params[:specialtysearch]}%")
     else
-      where("name ILIKE ? AND CAST(country_id AS TEXT) LIKE ? AND CAST(state_id AS TEXT) LIKE ? AND CAST(medical_school_id AS TEXT) \
+      where("physicians.name ILIKE ? AND CAST(country_id AS TEXT) LIKE ? AND CAST(state_id AS TEXT) LIKE ? AND CAST(medical_school_id AS TEXT) \
 LIKE ? AND CAST(gender_id AS TEXT) LIKE ? AND (CAST(residency_hospital_id AS TEXT) LIKE ? OR CAST(affiliation_hospital_id AS TEXT) LIKE ?)",
             "%#{params[:advsearch]}%", "%#{params[:country][:country_id]}%", "%#{params[:state][:state_id]}%",
             "%#{params[:medical_school][:medical_school_id]}%", "%#{params[:gender][:gender_id]}%",
