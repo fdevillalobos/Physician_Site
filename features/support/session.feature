@@ -37,7 +37,7 @@ Feature: session
     And I fill the current password field and update
     Then I should see account successfully updated
 
-Scenario: Change email
+  Scenario: Change email
     Given I have an existing user
     And I'm on the session page
     And I sign in with my credentials

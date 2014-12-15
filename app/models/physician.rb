@@ -71,9 +71,8 @@ LIKE ? AND CAST(gender_id AS TEXT) LIKE ? AND (CAST(residency_hospital_id AS TEX
   belongs_to :country
   belongs_to :state
   belongs_to :medical_school
-  belongs_to :group_practice              # Not working
-  # belongs_to :specialty                 # Not working
-  has_and_belongs_to_many :specialties
+  belongs_to :group_practice                  # Not working
+  has_and_belongs_to_many :specialties        # Needs a joint table
   belongs_to :gender
   belongs_to :credential
   # REFERENCING TWO COLUMNS IN THE SAME TABLE TO TWO DIFFERENT OBJECTS IN ANOTHER TABLE
@@ -88,8 +87,9 @@ LIKE ? AND CAST(gender_id AS TEXT) LIKE ? AND (CAST(residency_hospital_id AS TEX
   # Fairly nice Regex email validator that will ensure that your email has the correct formatting and at least could exist.
   validates_format_of :email, :with => /[a-z0-9!#$%&'*+\/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+\/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+(?:[A-Z]{2}|com|org|net|edu|gov|mil|biz|info|mobi|name|aero|asia|jobs|museum)\b/, :on => :create
   # Geocoder for Google Maps
-  geocoded_by :address   # can also be an IP address
-  after_validation :geocode          # auto-fetch coordinates
+  # Retrieve coordinates from field: address
+  geocoded_by :address                # can also be an IP address
+  after_validation :geocode           # auto-fetch coordinates
 
   def address
     [street, city, state.name, country.name].compact.join(', ')

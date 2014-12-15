@@ -10,6 +10,11 @@ class PhysiciansController < ApplicationController
       # @search_name = params[:search][:name]
       @physicians = Physician.search(params[:search]) #.order("name ASC")
       flash[:notice] = "Your search returned #{@physicians.size} results"
+      # Google Maps Representation of Physicians
+      @hash = Gmaps4rails.build_markers(@physicians) do |physician, marker|
+        marker.lat physician.latitude
+        marker.lng physician.longitude
+      end
       respond_with(@physicians)
     elsif params[:advsearch]
       redirect_to action: :adv_search, params: params
@@ -27,6 +32,11 @@ class PhysiciansController < ApplicationController
     else
       @physicians = Physician.all.order('name ASC')
     end
+    # Google Maps Representation of Physicians
+    @hash = Gmaps4rails.build_markers(@physicians) do |physician, marker|
+      marker.lat physician.latitude
+      marker.lng physician.longitude
+    end
     render :index
   end
 
@@ -36,7 +46,6 @@ class PhysiciansController < ApplicationController
       marker.lat physician.latitude
       marker.lng physician.longitude
     end
-    puts @hash
     respond_with(@physician)
   end
 

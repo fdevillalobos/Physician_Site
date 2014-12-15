@@ -30,16 +30,3 @@ jQuery ->
     else
       $('#physician_state_id').empty()
       $('#physician_state_id').parent().parent().hide()
-
-
-# Google Maps
-#handler = Gmaps.build("Google")
-#handler.buildMap
-#  provider: {}
-#  internal:
-#    id: "map"
-#, ->
-#  `markers = handler.addMarkers(<%=raw @hash.to_json %>)`
-#  handler.bounds.extendWith markers
-#  handler.fitMapToBounds()
-#  return

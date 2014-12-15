@@ -42,20 +42,17 @@
 <script type="text/javascript">
     handler = Gmaps.build('Google');
     handler.buildMap({
-                provider: {
-                    disableDefaultUI: false
-                    // pass in other Google Maps API options here
-                },
-                internal: {
-                    id: 'map'
-                }
+                provider: { zoom: 15 },
+                internal: { id: 'map' }
             },
             function(){
                 markers = handler.addMarkers(<%=raw @hash.to_json %>);
+//                console.log();
                 handler.bounds.extendWith(markers);
                 handler.fitMapToBounds();
+//                handler.map.centerOn({ lat: 40, lng: 5 })
             });
-    handler.zoom(5)
+//    handler.setZoom(10);
 </script>
 
 <!--Google Maps API Gem-->
