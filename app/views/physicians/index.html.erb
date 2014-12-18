@@ -22,7 +22,7 @@
 </div>
 
 <div id="advanced_search" class="row" style="display: none">
-  <div class="col-md-8">
+  <div class="col-md-9">
     <form class="form-inline" style="width:500px">
       <%= form_tag({controller: 'physicians', action: 'adv_search'}, :method => "get", id: "advsearch-form") do %>
           <%= text_field_tag :advsearch, params[:advsearch], class: "form-control", style:"width:300px", placeholder: "Physician name, surname or NPI"%>
@@ -36,12 +36,34 @@
       <% end %>
     </form>
   </div>
-  <div class="col-md-4">
+  <div class="col-md-3">
     <button id="bas_search" type="button" class="btn btn-default" style="float:right">Basic Search</button>
   </div>
 </div>
 
+<!--Google Maps Javascript-->
+<script type="text/javascript">
+    handler = Gmaps.build('Google');
+    handler.buildMap({
+                provider: { zoom: 5 },
+                internal: { id: 'map' }
+            },
+            function(){
+                markers = handler.addMarkers(<%=raw @hash.to_json %>);
+//                console.log();
+                handler.bounds.extendWith(markers);
+                handler.fitMapToBounds();
+//                handler.map.centerOn({ lat: 40, lng: 5 })
+            });
+    //    handler.setZoom(10);
+</script>
 
+<div id="map_row" class="row up_space">
+  <div class="col-md-12">
+    <!--Google Maps API Gem-->
+    <div id="map" class="col-centered" style='width: 800px; height: 400px;'></div>
+  </div>
+</div>
 
 
 <table class="table table-striped">
