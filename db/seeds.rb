@@ -29,7 +29,7 @@ end
 
 # Gender
 Gender.delete_all
-sex_list = ['Male', 'Female', 'Other']
+sex_list = ['Male', 'Female', 'Other', 'Fake']
 sex_list.each do |gender|
   Gender.create( sex: gender )
   puts 'Created gender: ' << gender
