@@ -34,7 +34,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, :omniauth_providers => [:facebook]
 
-  devise :confirmable     # Activate Confirmation email
+  # devise :confirmable     # Activate Confirmation email
 
   has_many :reviews
 
