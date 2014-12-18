@@ -23,7 +23,7 @@ gem 'annotate'        # Puts the actual schema annotation in the model file
 
 gem 'figaro'
 
-gem 'rspec-rails'
+# gem 'rspec-rails'
 gem 'rails_layout'
 
 gem 'omniauth-facebook'
@@ -43,7 +43,7 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'rails_refactor'
   #gem 'faker'
-  #gem 'rspec-rails'
+  gem 'rspec-rails'
   #gem 'sqlite3'
   gem 'cucumber-rails', :require => false     # By default don't include till I say require 'cucumber-rails'.
   gem 'cucumber-rails-training-wheels'
@@ -51,6 +51,7 @@ group :development, :test do
   gem 'capybara'                              # Fill in forms automatically.
   gem 'launchy'                               # Use launchy to start processes and applications.
   gem 'sqlite3'
+  gem 'simplecov', :require => false
 end
 group :production do
   gem 'pg'
