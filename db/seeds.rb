@@ -29,7 +29,7 @@ end
 
 # Gender
 Gender.delete_all
-sex_list = ['Male', 'Female', 'Other', 'Doesthiswork']
+sex_list = ['Male', 'Female', 'Other']
 sex_list.each do |gender|
   Gender.create( sex: gender )
   puts 'Created gender: ' << gender
@@ -85,6 +85,8 @@ specialty_list.each do |special|
   Specialty.create( name: special )
   puts 'Created specialty: ' << special
 end
+
+
 
 
 
