@@ -123,7 +123,7 @@ if Rails.env.development?
     csv_name = row[17]
     csv_gender = row[16]
     csv_credential = row[7]
-    csv_email = "doctor_" + row[0] + "seeddoctor.com"
+    csv_email = "doctor_" + row[0] + "@seeddoctor.com"
     csv_street = row[8]
     csv_city = row[10] 
     csv_npi = row[0]
@@ -135,16 +135,16 @@ if Rails.env.development?
     puts "name: #{row[17]}, NPI: #{row[0]}, email: doctor_#{row[0]}@doctors.com, street: #{row[8]}, city: #{row[10]}"
     puts "\n"
     if csv_gender == "M" and csv_credential == "MD"
-      Physician.where(npi: csv_npi, phone: csv_phone, name: csv_name, gender: male_gender, credential: md_credential, email: csv_email, state: penn_state, country: us_country, street: csv_street, city: csv_city).first_or_create
+      Physician.where(name: csv_name, gender: male_gender, credential: md_credential, email: csv_email, state: penn_state, country: us_country, street: csv_street, city: csv_city).first_or_create
       puts "should see M MD, #{csv_gender} #{csv_credential}"
     elsif csv_gender == "M" and csv_credential == "DO"
       puts "should see M DO, #{csv_gender} #{csv_credential}"
-      Physician.where(npi: csv_npi, phone: csv_phone, name: csv_name, gender: male_gender, credential: do_credential, email: csv_email, state: penn_state, country: us_country, street: csv_street, city: csv_city).first_or_create
+      Physician.where(name: csv_name, gender: male_gender, credential: do_credential, email: csv_email, state: penn_state, country: us_country, street: csv_street, city: csv_city).first_or_create
     elsif csv_gender == "F" and csv_credential == "MD"
       puts "should see F MD, #{csv_gender} #{csv_credential}"
-      Physician.where(npi: csv_npi, phone: csv_phone, name: csv_name, gender: female_gender, credential: md_credential, email: csv_email, state: penn_state, country: us_country, street: csv_street, city: csv_city).first_or_create
+      Physician.where(name: csv_name, gender: female_gender, credential: md_credential, email: csv_email, state: penn_state, country: us_country, street: csv_street, city: csv_city).first_or_create
     else
-      Physician.where(npi: csv_npi, phone: csv_phone, name: csv_name, gender: female_gender, credential: do_credential, email: csv_email, state: penn_state, country: us_country, street: csv_street, city: csv_city).first_or_create
+      Physician.where(name: csv_name, gender: female_gender, credential: do_credential, email: csv_email, state: penn_state, country: us_country, street: csv_street, city: csv_city).first_or_create
     end 
   end
 
