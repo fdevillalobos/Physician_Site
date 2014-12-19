@@ -160,7 +160,7 @@ else
 
   row_iter = 0
   max_row = 50
-  CSV.foreach("physician_input_first_10.csv") do |row|
+  CSV.foreach("physician_input first_1000.csv") do |row|
     row_iter += 1
     if row_iter > max_row then break end
     csv_name = row[17]
