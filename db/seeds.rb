@@ -5,6 +5,7 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
 user = CreateAdminService.new.call
 puts 'CREATED ADMIN USER: ' << user.email
 
@@ -14,6 +15,7 @@ user = User.find_or_create_by!(email: 'guest@guest.com') do |user|
   user.password_confirmation = 'guest1234'
   user.name = 'Guest'
   user.admin = false
+  user.confirmed_at = DateTime.now
 end
 puts 'CREATED GUEST USER: ' << user.email
 
