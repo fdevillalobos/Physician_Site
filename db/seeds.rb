@@ -92,19 +92,17 @@ end
 
 
 if Rails.env.development?
-  female_gender = Gender.find(14)
-  md_credential = Credential.find(9)
-  penn_state = State.find(3559)
-  us_country = Country.find(233)
-  new_phys = Physician.new(:name => "Seeds Doctor2", :gender => female_gender, :credential => md_credential, :email => " seedsdoctor2@seedsdoctor.com ",:state => penn_state, :country => us_country, :street => "Seeds Street ", :city => "Seeds City")
-  new_phys.save
+  female_gender = Gender.find_by_sex('Female')
+  md_credential = Credential.find_by_name('MD')
+  penn_state = State.find_by_name('Pennsylvania')
+  us_country = Country.find_by_name('United States')
+  Physician.where(name: "Seeds Doctor2", gender: female_gender, credential: md_credential, email: "seedsdoctor2@seedsdoctor.com", state: penn_state, country: us_country, street: "Seeds Street ", city: "Seeds City").first_or_create
 else
-  female_gender = Gender.find(20)
-  md_credential = Credential.find(12)
-  penn_state = State.find(3559)
-  us_country = Country.find(233)
-  new_phys = Physician.new(:name => "Donald Draper", :gender => female_gender, :credential => md_credential, :email => "donald@draper.com",:state => penn_state, :country => us_country, :street => "Seeds Street", :city => "Seeds City")
-  new_phys.save
+  female_gender = Gender.find_by_sex('Female')
+  md_credential = Credential.find_by_name('MD')
+  penn_state = State.find_by_name('Pennsylvania')
+  us_country = Country.find_by_name('United States')
+  Physician.where( name: "Donald Draper", gender: female_gender, credential: md_credential, email: "donald@draper.com", state: penn_state, country: us_country, street: "Seeds Street", city: "Seeds City").first_or_create
 end
 
 
