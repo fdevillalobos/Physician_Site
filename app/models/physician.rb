@@ -88,9 +88,8 @@ class Physician < ActiveRecord::Base
 
   # Geocoder for Google Maps
   # Retrieve coordinates from field: address
-  # after_validation :geocode, :unless => lambda { |obj| obj.street.nil? AND obj.city.nil? AND obj.state.name.nil? AND obj.country.name.nil? }
   geocoded_by :address                # can also be an IP address
-  after_validation :geocode          # auto-fetch coordinates
+  after_validation :geocode, if: ->(obj){ obj.address.present? } # and obj.address_changed? }
 
   before_save :default_values
 

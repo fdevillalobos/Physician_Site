@@ -13,6 +13,7 @@ class PhysiciansController < ApplicationController
       flash.now[:notice] = "Your search returned #{@physicians.size} results" #flash.now seems to fix the flash lasting for two page loads
       # Google Maps Representation of Physicians
       set_markers(@physicians)
+      # puts @hash
       respond_with(@physicians)
     elsif params[:advsearch]
       puts "redirecting in index to adv_search because there is an :advsearch parameter"
@@ -25,6 +26,10 @@ class PhysiciansController < ApplicationController
       #   marker.lat physician.latitude
       #   marker.lng physician.longitude
       # end
+      # puts @hash
+      puts request.remote_ip
+      puts current_user.latitude
+      puts current_user.longitude
       respond_with(@physicians)
     end
 
@@ -38,19 +43,13 @@ class PhysiciansController < ApplicationController
       @physicians = Physician.all.order('name ASC')
     end
     # Google Maps Representation of Physicians
-    @hash = Gmaps4rails.build_markers(@physicians) do |physician, marker|
-      marker.lat physician.latitude
-      marker.lng physician.longitude
-    end
+    set_markers(@physicians)
     render :index
   end
 
   def show
     # @physician = Physician.find(params[:id])      # Already implemented in set_physician
-    @hash = Gmaps4rails.build_markers(@physician) do |physician, marker|
-      marker.lat physician.latitude
-      marker.lng physician.longitude
-    end
+    set_markers(@physician)
     respond_with(@physician)
   end
 
@@ -99,6 +98,8 @@ class PhysiciansController < ApplicationController
       unless current_user
         @current_user = User.find_by_email("guest@guest.com")
       end
+      current_user.ip = request.remote_ip
+      current_user.save
     end
 
     def physician_params

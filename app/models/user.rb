@@ -23,6 +23,7 @@
 #  confirmation_token     :string(255)
 #  confirmed_at           :datetime
 #  confirmation_sent_at   :datetime
+#  ip                     :string(255)
 #
 
 class User < ActiveRecord::Base
@@ -37,6 +38,10 @@ class User < ActiveRecord::Base
   # devise :confirmable     # Activate Confirmation email
 
   has_many :reviews
+
+  # Geocode Users
+  geocoded_by :ip, :latitude => :latitude, :longitude => :longitude
+  after_validation :geocode
 
 def self.from_omniauth(auth)
   where(provider: auth.provider, uid: auth.uid).first_or_create do |user|

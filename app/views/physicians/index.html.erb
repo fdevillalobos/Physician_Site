@@ -1,129 +1,117 @@
-<%= javascript_include_tag "application" %>
+
 
 <%- model_class = Physician -%>
-<div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
-</div>
+
+<div class="container-full">
+  <div class="page-header">
+    <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+  </div>
 
 
 
-<div id="basic_search" class="row">
-  <div class="col-md-8">
-    <form class="form-inline" style="width:500px">
-      <%= form_tag(physicians_path, :method => "get", id: "search-form") do %>
-          <%= text_field_tag :search, params[:search], class: "form-control", style:"width:300px", placeholder: "Search Physicians"%>
-          <%= submit_tag "Search", :name => nil, class: "btn btn-default", style:"margin-left:10px" %>
+  <div id="basic_search" class="row">
+    <div class="col-md-8">
+      <form class="form-inline" style="width:500px">
+        <%= form_tag(physicians_path, :method => "get", id: "search-form") do %>
+            <%= text_field_tag :search, params[:search], class: "form-control", style:"width:300px", placeholder: "Search Physicians"%>
+            <%= submit_tag "Search", :name => nil, class: "btn btn-default", style:"margin-left:10px" %>
+        <% end %>
+      </form>
+    </div>
+    <div class="col-md-4">
+      <button id="adv_search" type="button" class="btn btn-default" style="float:right">Advanced Search</button>
+    </div>
+  </div>
+
+  <div id="advanced_search" class="row" style="display: none">
+    <div class="col-md-12">
+      <form class="form-inline col-centered" style="width:100%">
+        <%= form_tag({controller: 'physicians', action: 'adv_search'}, :method => "get", id: "advsearch-form") do %>
+            <%= text_field_tag :advsearch, params[:advsearch], class: "form-control", style:"width:49%", placeholder: "Physician name, surname or NPI"%>
+            <%= text_field_tag :specialtysearch, params[:specialtysearch], class: "form-control", style:"width:49%", placeholder: "Specialty, conditions treated, or procedures performed"%>
+            <%= collection_select(:country, :country_id, Country.all, :id, :name, {prompt: "Select a Country"}, {class: 'form-control', style:"width:25%"}) %>
+            <%= collection_select(:state, :state_id, State.all, :id, :name, {prompt: "Select a State"}, {class: 'form-control', style:"width:24%"}) %>
+            <%= collection_select(:medical_school, :medical_school_id, MedicalSchool.all, :id, :name, {prompt: "Select a Medical School"}, {class: 'form-control', style:"width:24%"}) %>
+            <%= collection_select(:gender, :gender_id, Gender.all, :id, :sex, {prompt: "Select a Gender"}, {class: 'form-control', style:"width:24%"}) %>
+            <%= collection_select(:hospital, :hospital_id, Hospital.all, :id, :name, {prompt: "Select a Hospital"}, {class: 'form-control', style:"width:25%"}) %>
+            <%= submit_tag "Search", :name => nil, class: "btn btn-default", style:"margin-left:10px" %>
+            <button id="bas_search" type="button" class="btn btn-default" style="float:right; margin-right: 11px">Basic Search</button>
+        <% end %>
+      </form>
+    </div>
+  </div>
+
+
+
+  <div id="map_row" class="row up_space">
+    <div class="col-md-12">
+      <!--Google Maps API Gem-->
+      <div id="map" class="col-centered" style='width: 800px; height: 400px;'></div>
+    </div>
+  </div>
+
+  <div class="container-fluid up_space">
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <!--<th><%= model_class.human_attribute_name(:id) %></th>-->
+        <th><%= model_class.human_attribute_name(:name) %></th>
+        <th><%= model_class.human_attribute_name(:email) %></th>
+        <th><%= model_class.human_attribute_name(:country_id) %></th>
+        <th><%= model_class.human_attribute_name(:state_id) %></th>
+        <th><%= model_class.human_attribute_name(:medical_school_id) %></th>
+        <!--<th><%= model_class.human_attribute_name(:NPI) %></th>-->
+        <!--<th><%= model_class.human_attribute_name(:gender_id) %></th>-->
+        <!--<th><%= model_class.human_attribute_name(:birth) %></th>-->
+        <!--<th><%= model_class.human_attribute_name(:phone) %></th>-->
+        <th><%= model_class.human_attribute_name(:residency_hospital_id) %></th>
+        <th><%= model_class.human_attribute_name(:affiliation_hospital_id) %></th>
+        <th><%= model_class.human_attribute_name(:credential_id) %></th>
+        <th><%= model_class.human_attribute_name(:group_practice_id) %></th>
+        <th><%= model_class.human_attribute_name(:specialties) %></th>
+        <!--<th><%= model_class.human_attribute_name(:created_at) %></th>-->
+        <% if current_user && current_user.admin? %> <th><%=t '.actions', :default => t("helpers.actions") %></th><% end %>
+      </tr>
+      </thead>
+      <tbody>
+      <% @physicians.each do |physician| %>
+          <tr>
+            <!--<td><%= link_to physician.id, physician_path(physician) %></td>-->
+            <td><%= link_to physician.name, physician_path(physician) %></td>
+            <td><%= physician.email %></td>
+            <td><%= physician.country.name unless physician.country.nil? %></td>
+            <td><%= physician.state.name unless physician.state.nil? %></td>
+            <td><%= physician.medical_school.name unless physician.medical_school.nil? %></td>
+            <!--<td><%= physician.NPI %></td>-->
+            <!--<td><%= physician.gender.sex %></td>-->
+            <!--<td><%= physician.birth %></td>-->
+            <!--<td><%= physician.phone %></td>-->
+            <td><%= physician.residency_hospital.name unless physician.residency_hospital.nil? %></td>
+            <td><%= physician.affiliation_hospital.name unless physician.affiliation_hospital.nil? %></td>
+            <td><%= physician.credential.name %></td>
+            <td><%= physician.group_practice.name unless physician.group_practice.nil? %></td>
+            <td><%= physician.specialties.select(:name).map(&:name).join(', ') %></td>
+            <!--<td><%= physician.created_at.to_formatted_s(:short) %></td>-->
+            <% if current_user && current_user.admin?  %>
+                <td>
+                  <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                              edit_physician_path(physician), :class => 'btn btn-default btn-xs' %>
+                  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                              physician_path(physician),
+                              :method => :delete,
+                              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                              :class => 'btn btn-xs btn-danger' %>
+                </td>
+            <% end %>
+          </tr>
       <% end %>
-    </form>
+      </tbody>
+    </table>
   </div>
-  <div class="col-md-4">
-    <button id="adv_search" type="button" class="btn btn-default" style="float:right">Advanced Search</button>
-  </div>
+
+  <% if current_user && current_user.admin?  %>
+      <%= link_to t('.new', :default => t("helpers.links.new")),
+                  new_physician_path,
+                  :class => 'btn btn-primary' %>
+  <% end %>
 </div>
-
-<div id="advanced_search" class="row" style="display: none">
-  <div class="col-md-12">
-    <form class="form-inline col-centered" style="width:100%">
-      <%= form_tag({controller: 'physicians', action: 'adv_search'}, :method => "get", id: "advsearch-form") do %>
-          <%= text_field_tag :advsearch, params[:advsearch], class: "form-control", style:"width:49%", placeholder: "Physician name, surname or NPI"%>
-          <%= text_field_tag :specialtysearch, params[:specialtysearch], class: "form-control", style:"width:49%", placeholder: "Specialty, conditions treated, or procedures performed"%>
-          <%= collection_select(:country, :country_id, Country.all, :id, :name, {prompt: "Select a Country"}, {class: 'form-control', style:"width:25%"}) %>
-          <%= collection_select(:state, :state_id, State.all, :id, :name, {prompt: "Select a State"}, {class: 'form-control', style:"width:24%"}) %>
-          <%= collection_select(:medical_school, :medical_school_id, MedicalSchool.all, :id, :name, {prompt: "Select a Medical School"}, {class: 'form-control', style:"width:24%"}) %>
-          <%= collection_select(:gender, :gender_id, Gender.all, :id, :sex, {prompt: "Select a Gender"}, {class: 'form-control', style:"width:24%"}) %>
-          <%= collection_select(:hospital, :hospital_id, Hospital.all, :id, :name, {prompt: "Select a Hospital"}, {class: 'form-control', style:"width:25%"}) %>
-          <%= submit_tag "Search", :name => nil, class: "btn btn-default", style:"margin-left:10px" %>
-          <button id="bas_search" type="button" class="btn btn-default" style="float:right; margin-right: 11px">Basic Search</button>
-      <% end %>
-    </form>
-  </div>
-</div>
-
-<!--Google Maps Javascript-->
-<script type="text/javascript">
-    handler = Gmaps.build('Google');
-    handler.buildMap({
-                provider: { zoom: 5 },
-                internal: { id: 'map' }
-            },
-            function(){
-                markers = handler.addMarkers(<%=raw @hash.to_json %>);
-//                console.log();
-                handler.bounds.extendWith(markers);
-                handler.fitMapToBounds();
-//                handler.map.centerOn({ lat: 40, lng: 5 })
-            });
-    //    handler.setZoom(10);
-</script>
-
-<div id="map_row" class="row up_space">
-  <div class="col-md-12">
-    <!--Google Maps API Gem-->
-    <div id="map" class="col-centered" style='width: 800px; height: 400px;'></div>
-  </div>
-</div>
-
-<div class="row up_space">
-  <table class="table table-striped">
-    <thead>
-    <tr>
-      <!--<th><%= model_class.human_attribute_name(:id) %></th>-->
-      <th><%= model_class.human_attribute_name(:name) %></th>
-      <th><%= model_class.human_attribute_name(:email) %></th>
-      <th><%= model_class.human_attribute_name(:country_id) %></th>
-      <th><%= model_class.human_attribute_name(:state_id) %></th>
-      <th><%= model_class.human_attribute_name(:medical_school_id) %></th>
-      <th><%= model_class.human_attribute_name(:NPI) %></th>
-      <!--<th><%= model_class.human_attribute_name(:gender_id) %></th>-->
-      <!--<th><%= model_class.human_attribute_name(:birth) %></th>-->
-      <!--<th><%= model_class.human_attribute_name(:phone) %></th>-->
-      <th><%= model_class.human_attribute_name(:residency_hospital_id) %></th>
-      <th><%= model_class.human_attribute_name(:affiliation_hospital_id) %></th>
-      <th><%= model_class.human_attribute_name(:credential_id) %></th>
-      <th><%= model_class.human_attribute_name(:group_practice_id) %></th>
-      <th><%= model_class.human_attribute_name(:specialties) %></th>
-      <!--<th><%= model_class.human_attribute_name(:created_at) %></th>-->
-      <% if current_user && current_user.admin? %> <th><%=t '.actions', :default => t("helpers.actions") %></th><% end %>
-    </tr>
-    </thead>
-    <tbody>
-    <% @physicians.each do |physician| %>
-        <tr>
-          <!--<td><%= link_to physician.id, physician_path(physician) %></td>-->
-          <td><%= link_to physician.name, physician_path(physician) %></td>
-          <td><%= physician.email %></td>
-          <td><%= physician.country.name unless physician.country.nil? %></td>
-          <td><%= physician.state.name unless physician.state.nil? %></td>
-          <td><%= physician.medical_school.name unless physician.medical_school.nil? %></td>
-          <td><%= physician.NPI %></td>
-          <!--<td><%= physician.gender.sex %></td>-->
-          <!--<td><%= physician.birth %></td>-->
-          <!--<td><%= physician.phone %></td>-->
-          <td><%= physician.residency_hospital.name unless physician.residency_hospital.nil? %></td>
-          <td><%= physician.affiliation_hospital.name unless physician.affiliation_hospital.nil? %></td>
-          <td><%= physician.credential.name %></td>
-          <td><%= physician.group_practice.name unless physician.group_practice.nil? %></td>
-          <td><%= physician.specialties.select(:name).map(&:name).join(', ') %></td>
-          <!--<td><%= physician.created_at.to_formatted_s(:short) %></td>-->
-          <% if current_user && current_user.admin?  %>
-              <td>
-                <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                            edit_physician_path(physician), :class => 'btn btn-default btn-xs' %>
-                <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                            physician_path(physician),
-                            :method => :delete,
-                            :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-                            :class => 'btn btn-xs btn-danger' %>
-              </td>
-          <% end %>
-        </tr>
-    <% end %>
-    </tbody>
-  </table>
-</div>
-
-<% if current_user && current_user.admin?  %>
-<%= link_to t('.new', :default => t("helpers.links.new")),
-            new_physician_path,
-            :class => 'btn btn-primary' %>
-<% end %>

@@ -140,13 +140,13 @@ Given(/^doctors are in the database$/) do
   @gender_m = Gender.create(:sex => "male")
   @gender_f = Gender.create(:sex => "female")
   @credential = Credential.create(:name => "MD")
-  @physician = Physician.create(:name => 'Martin Bohnenkamp', :email => 'martin.bohnenkamp@uphs.upenn.edu')
-  @physician.credential, @physician.gender = @credential, @gender_m
-  @physician.save!
+  @physician = Physician.create(name: 'Martin Bohnenkamp', email: 'martin.bohnenkamp@uphs.upenn.edu', credential: @credential, gender: @gender_m)
+  # @physician.credential, @physician.gender = @credential, @gender_m
+  # @physician.save!
 
-  @physician2 = Physician.create(:name => 'Stephanie Ewing', :email => 'fakeemail@fakehost.com')
-  @physician2.credential, @physician2.gender = @credential, @gender_f
-  @physician2.save!
+  @physician2 = Physician.create(name: 'Stephanie Ewing', email: 'fakeemail@fakehost.com', credential: @credential, gender: @gender_f)
+  # @physician2.credential, @physician2.gender = @credential, @gender_f
+  # @physician2.save!
 end
 
 Given(/^the doctors database has many doctors$/) do
@@ -158,7 +158,7 @@ Given(/^I'm on the doctor search webpage$/) do
 end
 
 When(/^I search for a doctor who exists in the database$/) do
-  fill_in :search, :with => "DESALVO" # id for search field is  "search"
+  fill_in :search, :with => "Martin" # id for search field is  "search"
   click_button 'Search' # button's value is "Search"
 end
 

@@ -22,6 +22,7 @@
 #  confirmation_token     :string(255)
 #  confirmed_at           :datetime
 #  confirmation_sent_at   :datetime
+#  ip                     :string(255)
 #
 
 FactoryGirl.define do

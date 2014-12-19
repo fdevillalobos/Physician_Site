@@ -19,6 +19,7 @@
 # RAILS GITIGNORE
 
 *.rbc
+.DS_Spec
 
 capybara-*.html
 
