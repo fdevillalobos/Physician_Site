@@ -180,16 +180,18 @@ else
     puts "name: #{row[17]}, NPI: #{row[0]}, email: doctor_#{row[0]}@doctors.com, street: #{row[8]}, city: #{row[10]}"
     puts "\n"
     if csv_gender == "M" and csv_credential == "MD"
-      Physician.where(NPI: csv_npi, phone: csv_phone, name: csv_name, gender: male_gender, credential: md_credential, email: csv_email, state: penn_state, country: us_country, street: csv_street, city: csv_city).first_or_create
+      Physician.where(name: csv_name, gender: male_gender, credential: md_credential, email: csv_email, state: penn_state, country: us_country, street: csv_street, city: csv_city).first_or_create
       puts "should see M MD, #{csv_gender} #{csv_credential}"
     elsif csv_gender == "M" and csv_credential == "DO"
       puts "should see M DO, #{csv_gender} #{csv_credential}"
-      Physician.where(NPI: csv_npi, phone: csv_phone, name: csv_name, gender: male_gender, credential: do_credential, email: csv_email, state: penn_state, country: us_country, street: csv_street, city: csv_city).first_or_create
+      Physician.where(name: csv_name, gender: male_gender, credential: do_credential, email: csv_email, state: penn_state, country: us_country, street: csv_street, city: csv_city).first_or_create
     elsif csv_gender == "F" and csv_credential == "MD"
       puts "should see F MD, #{csv_gender} #{csv_credential}"
-      Physician.where(NPI: csv_npi, phone: csv_phone, name: csv_name, gender: female_gender, credential: md_credential, email: csv_email, state: penn_state, country: us_country, street: csv_street, city: csv_city).first_or_create
+      Physician.where(name: csv_name, gender: female_gender, credential: md_credential, email: csv_email, state: penn_state, country: us_country, street: csv_street, city: csv_city).first_or_create
     else
-      Physician.where(NPI: csv_npi, phone: csv_phone, name: csv_name, gender: female_gender, credential: do_credential, email: csv_email, state: penn_state, country: us_country, street: csv_street, city: csv_city).first_or_create
+      Physician.where(name: csv_name, gender: female_gender, credential: do_credential, email: csv_email, state: penn_state, country: us_country, street: csv_street, city: csv_city).first_or_create
+      # Physician.where(NPI: csv_npi, phone: csv_phone, name: csv_name, gender: female_gender, credential: do_credential, email: csv_email, state: penn_state, country: us_country, street: csv_street, city: csv_city).first_or_create
+
     end 
   end
 
