@@ -27,8 +27,8 @@ class PhysiciansController < ApplicationController
       #   marker.lng physician.longitude
       # end
       # puts @hash
-      puts "Remote IP: ", request.remote_ip
-      puts "Latitude: ", current_user.latitude
+      puts "Remote IP: ",current_user.ip
+      puts "Latitude: ",current_user.latitude
       puts "Longitude: ",current_user.longitude
       respond_with(@physicians)
     end
