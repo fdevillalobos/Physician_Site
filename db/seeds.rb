@@ -166,7 +166,7 @@ else
     csv_name = row[17]
     csv_gender = row[16]
     csv_credential = row[7]
-    csv_email = "doctor_" + row[0] + "seeddoctor.com"
+    csv_email = "doctor_" + row[0] + "@seeddoctor.com"
     csv_street = row[8]
     csv_city = row[10] 
     csv_npi = row[0]
