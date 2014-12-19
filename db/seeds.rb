@@ -1,3 +1,4 @@
+require 'csv'
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
 #
@@ -91,9 +92,18 @@ end
 
 if Rails.env.development?
   female_gender = Gender.find(14)
+  male_gender = Gender.find(13)
   md_credential = Credential.find(9)
+  do_credential = Credential.find(10)
   penn_state = State.find(3559)
   us_country = Country.find(233)
+  csv_name = row[17]
+  csv_gender = row[16]
+  csv_credential = row[7]
+  csv_email = "doctor_" + row[0] + "seeddoctor.com"
+  csv_street = row[8]
+  csv_city = row[10]
+  if (csv_gender = 
   new_phys = Physician.new(:name => "Seeds Doctor2", :gender => female_gender, :credential => md_credential, :email => " seedsdoctor2@seedsdoctor.com ",:state => penn_state, :country => us_country, :street => "Seeds Street ", :city => "Seeds City")
   new_phys.save
 else
