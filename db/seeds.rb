@@ -129,7 +129,6 @@ if Rails.env.development?
     csv_npi = row[0]
     csv_phone = row[14]
 
-    sleep(1)
     if row[11] == "PA" then row_state = "Pennsylvania" end 
     if row[13] == "US" then row_country = "United States" end 
     puts "row #{row_iter}. gender: #{row[16]}, credential: #{row[7]}, state: #{row_state}, country: #{row_country}"
@@ -173,18 +172,19 @@ else
     csv_npi = row[0]
     csv_phone = row[14]
 
-    sleep(1)
     if row[11] == "PA" then row_state = "Pennsylvania" end 
     if row[13] == "US" then row_country = "United States" end 
     puts "row #{row_iter}. gender: #{row[16]}, credential: #{row[7]}, state: #{row_state}, country: #{row_country}"
     puts "name: #{row[17]}, NPI: #{row[0]}, email: doctor_#{row[0]}@doctors.com, street: #{row[8]}, city: #{row[10]}"
     puts "\n"
     if csv_gender == "M" and csv_credential == "MD"
-      Physician.where(name: csv_name, gender: male_gender, credential: md_credential, email: csv_email, state: penn_state, country: us_country, street: csv_street, city: csv_city).first_or_create
+      # Physician.where(name: csv_name, gender: male_gender, credential: md_credential, email: csv_email, state: penn_state, country: us_country, street: csv_street, city: csv_city).first_or_create
+      Physician.where(name: csv_name, gender: male_gender, credential: md_credential, email: csv_email)
       puts "should see M MD, #{csv_gender} #{csv_credential}"
     elsif csv_gender == "M" and csv_credential == "DO"
       puts "should see M DO, #{csv_gender} #{csv_credential}"
-      Physician.where(name: csv_name, gender: male_gender, credential: do_credential, email: csv_email, state: penn_state, country: us_country, street: csv_street, city: csv_city).first_or_create
+      # Physician.where(name: csv_name, gender: male_gender, credential: do_credential, email: csv_email, state: penn_state, country: us_country, street: csv_street, city: csv_city).first_or_create
+      Physician.where(name: csv_name, gender: male_gender, credential: do_credential, email: csv_email)
     elsif csv_gender == "F" and csv_credential == "MD"
       puts "should see F MD, #{csv_gender} #{csv_credential}"
       Physician.where(name: csv_name, gender: female_gender, credential: md_credential, email: csv_email, state: penn_state, country: us_country, street: csv_street, city: csv_city).first_or_create
