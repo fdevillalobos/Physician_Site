@@ -1,3 +1,4 @@
+require 'csv'
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
 #
@@ -92,17 +93,113 @@ end
 
 
 if Rails.env.development?
+  # female_gender = Gender.find(14)
+  # male_gender = Gender.find(13)
+  # md_credential = Credential.find(9)
+  # do_credential = Credential.find(10)
+  # penn_state = State.find(3559)
+  # us_country = Country.find(233)
+  # csv_name = row[17]
+  # csv_gender = row[16]
+  # csv_credential = row[7]
+  # csv_email = "doctor_" + row[0] + "seeddoctor.com"
+  # csv_street = row[8]
+  # csv_city = row[10]
+  # if (csv_gender = 
+  # new_phys = Physician.new(:name => "Seeds Doctor2", :gender => female_gender, :credential => md_credential, :email => " seedsdoctor2@seedsdoctor.com ",:state => penn_state, :country => us_country, :street => "Seeds Street ", :city => "Seeds City")
+  # new_phys.save
   female_gender = Gender.find_by_sex('Female')
+  male_gender = Gender.find_by_sex('Male')
   md_credential = Credential.find_by_name('MD')
+  do_credential = Credential.find_by_name('DO')
   penn_state = State.find_by_name('Pennsylvania')
   us_country = Country.find_by_name('United States')
+
+  row_iter = 0
+  max_row = 50
+  CSV.foreach("physician_input_first_10.csv") do |row|
+    row_iter += 1
+    if row_iter > max_row then break end
+    csv_name = row[17]
+    csv_gender = row[16]
+    csv_credential = row[7]
+    csv_email = "doctor_" + row[0] + "@seeddoctor.com"
+    csv_street = row[8]
+    csv_city = row[10] 
+    csv_npi = row[0]
+    csv_phone = row[14]
+
+    if row[11] == "PA" then row_state = "Pennsylvania" end 
+    if row[13] == "US" then row_country = "United States" end 
+    puts "row #{row_iter}. gender: #{row[16]}, credential: #{row[7]}, state: #{row_state}, country: #{row_country}"
+    puts "name: #{row[17]}, NPI: #{row[0]}, email: doctor_#{row[0]}@doctors.com, street: #{row[8]}, city: #{row[10]}"
+    puts "\n"
+    if csv_gender == "M" and csv_credential == "MD"
+      Physician.where(name: csv_name, gender: male_gender, credential: md_credential, email: csv_email, state: penn_state, country: us_country, street: csv_street, city: csv_city).first_or_create
+      puts "should see M MD, #{csv_gender} #{csv_credential}"
+    elsif csv_gender == "M" and csv_credential == "DO"
+      puts "should see M DO, #{csv_gender} #{csv_credential}"
+      Physician.where(name: csv_name, gender: male_gender, credential: do_credential, email: csv_email, state: penn_state, country: us_country, street: csv_street, city: csv_city).first_or_create
+    elsif csv_gender == "F" and csv_credential == "MD"
+      puts "should see F MD, #{csv_gender} #{csv_credential}"
+      Physician.where(name: csv_name, gender: female_gender, credential: md_credential, email: csv_email, state: penn_state, country: us_country, street: csv_street, city: csv_city).first_or_create
+    else
+      Physician.where(name: csv_name, gender: female_gender, credential: do_credential, email: csv_email, state: penn_state, country: us_country, street: csv_street, city: csv_city).first_or_create
+    end 
+  end
+
   Physician.where(name: "Seeds Doctor2", gender: female_gender, credential: md_credential, email: "seedsdoctor2@seedsdoctor.com", state: penn_state, country: us_country, street: "Seeds Street ", city: "Seeds City").first_or_create
+
 else
   female_gender = Gender.find_by_sex('Female')
+  male_gender = Gender.find_by_sex('Male')
   md_credential = Credential.find_by_name('MD')
+  do_credential = Credential.find_by_name('DO')
   penn_state = State.find_by_name('Pennsylvania')
   us_country = Country.find_by_name('United States')
-  Physician.where( name: "Donald Draper", gender: female_gender, credential: md_credential, email: "donald@draper.com", state: penn_state, country: us_country, street: "Seeds Street", city: "Seeds City").first_or_create
+
+  row_iter = 0
+  max_row = 50
+  CSV.foreach("physician_input first_1000.csv") do |row|
+    row_iter += 1
+    if row_iter > max_row then break end
+    csv_name = row[17]
+    csv_gender = row[16]
+    csv_credential = row[7]
+    csv_email = "doctor_" + row[0] + "@seeddoctor.com"
+    csv_street = row[8]
+    csv_city = row[10] 
+    csv_npi = row[0]
+    csv_phone = row[14]
+
+    if row[11] == "PA" then row_state = "Pennsylvania" end 
+    if row[13] == "US" then row_country = "United States" end 
+    puts "row #{row_iter}. gender: #{row[16]}, credential: #{row[7]}, state: #{row_state}, country: #{row_country}"
+    puts "name: #{row[17]}, NPI: #{row[0]}, email: doctor_#{row[0]}@doctors.com, street: #{row[8]}, city: #{row[10]}"
+    puts "\n"
+    if csv_gender == "M" and csv_credential == "MD"
+      # Physician.where(name: csv_name, gender: male_gender, credential: md_credential, email: csv_email, state: penn_state, country: us_country, street: csv_street, city: csv_city).first_or_create
+      Physician.where(name: csv_name, gender: male_gender, credential: md_credential, email: csv_email, state: penn_state, country: us_country, street: csv_street, city: csv_city).first_or_create
+      puts "should see M MD, #{csv_gender} #{csv_credential}"
+    
+    elsif csv_gender == "M" and csv_credential == "DO"
+      puts "should see M DO, #{csv_gender} #{csv_credential}"
+      # Physician.where(name: csv_name, gender: male_gender, credential: do_credential, email: csv_email, state: penn_state, country: us_country, street: csv_street, city: csv_city).first_or_create
+      Physician.where(name: csv_name, gender: male_gender, credential: do_credential, email: csv_email, state: penn_state, country: us_country, street: csv_street, city: csv_city).first_or_create
+    
+    elsif csv_gender == "F" and csv_credential == "MD"
+      puts "should see F MD, #{csv_gender} #{csv_credential}"
+      Physician.where(name: csv_name, gender: female_gender, credential: md_credential, email: csv_email, state: penn_state, country: us_country, street: csv_street, city: csv_city).first_or_create
+
+    elsif csv_gender == "F" and csv_credential == "DO"
+      Physician.where(name: csv_name, gender: female_gender, credential: do_credential, email: csv_email, state: penn_state, country: us_country, street: csv_street, city: csv_city).first_or_create
+      # Physician.where(NPI: csv_npi, phone: csv_phone, name: csv_name, gender: female_gender, credential: do_credential, email: csv_email, state: penn_state, country: us_country, street: csv_street, city: csv_city).first_or_create
+
+    end 
+  end
+
+
+  # Physician.where( name: "Donald Draper", gender: female_gender, credential: md_credential, email: "crazyemailyo@draper.com", state: penn_state, country: us_country, street: "Seeds Street", city: "Seeds City").first_or_create
 end
 
 

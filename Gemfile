@@ -26,6 +26,8 @@ gem 'figaro'
 # gem 'rspec-rails'
 gem 'rails_layout'
 
+# gem 'csv'
+
 gem 'omniauth-facebook'
 
 gem 'haml'      # Gem that uses HAML instead of erb
