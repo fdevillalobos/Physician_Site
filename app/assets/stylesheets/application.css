@@ -14,12 +14,3 @@
  *= require_self
  */
 
-.col-centered{
-    float: none;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.up_space{
-    margin-top: 15px;
-}
