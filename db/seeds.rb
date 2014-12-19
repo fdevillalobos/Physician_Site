@@ -179,18 +179,17 @@ else
     puts "\n"
     if csv_gender == "M" and csv_credential == "MD"
       # Physician.where(name: csv_name, gender: male_gender, credential: md_credential, email: csv_email, state: penn_state, country: us_country, street: csv_street, city: csv_city).first_or_create
-      Physician.where(name: csv_name, gender: male_gender, credential: md_credential, email: "bestemail@bestemail.com")
+      Physician.where(name: csv_name, gender: male_gender, credential: md_credential, email: csv_email, state: penn_state, country: us_country, street: csv_street, city: csv_city).first_or_create
       puts "should see M MD, #{csv_gender} #{csv_credential}"
     
     elsif csv_gender == "M" and csv_credential == "DO"
       puts "should see M DO, #{csv_gender} #{csv_credential}"
       # Physician.where(name: csv_name, gender: male_gender, credential: do_credential, email: csv_email, state: penn_state, country: us_country, street: csv_street, city: csv_city).first_or_create
-      Physician.where(name: csv_name, gender: male_gender, credential: do_credential, email: csv_email)
+      Physician.where(name: csv_name, gender: male_gender, credential: do_credential, email: csv_email, state: penn_state, country: us_country, street: csv_street, city: csv_city).first_or_create
     
     elsif csv_gender == "F" and csv_credential == "MD"
       puts "should see F MD, #{csv_gender} #{csv_credential}"
       Physician.where(name: csv_name, gender: female_gender, credential: md_credential, email: csv_email, state: penn_state, country: us_country, street: csv_street, city: csv_city).first_or_create
-      Physician.where( name: csv_name, gender: female_gender, credential: md_credential, email: "insideloop333@draper.com", state: penn_state, country: us_country, street: csv_street, city: "Seeds City").first_or_create
 
     elsif csv_gender == "F" and csv_credential == "DO"
       Physician.where(name: csv_name, gender: female_gender, credential: do_credential, email: csv_email, state: penn_state, country: us_country, street: csv_street, city: csv_city).first_or_create
