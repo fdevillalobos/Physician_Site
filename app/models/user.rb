@@ -24,6 +24,8 @@
 #  confirmed_at           :datetime
 #  confirmation_sent_at   :datetime
 #  ip                     :string(255)
+#  latitude               :float
+#  longitude              :float
 #
 
 class User < ActiveRecord::Base
@@ -40,7 +42,7 @@ class User < ActiveRecord::Base
   has_many :reviews
 
   # Geocode Users
-  geocoded_by :ip, :latitude => :latitude, :longitude => :longitude
+  geocoded_by :ip
   after_validation :geocode
 
 def self.from_omniauth(auth)

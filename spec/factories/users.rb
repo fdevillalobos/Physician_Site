@@ -23,6 +23,8 @@
 #  confirmed_at           :datetime
 #  confirmation_sent_at   :datetime
 #  ip                     :string(255)
+#  latitude               :float
+#  longitude              :float
 #
 
 FactoryGirl.define do
