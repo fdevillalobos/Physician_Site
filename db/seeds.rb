@@ -188,7 +188,7 @@ else
     elsif csv_gender == "F" and csv_credential == "MD"
       puts "should see F MD, #{csv_gender} #{csv_credential}"
       Physician.where(name: csv_name, gender: female_gender, credential: md_credential, email: csv_email, state: penn_state, country: us_country, street: csv_street, city: csv_city).first_or_create
-      Physician.where( name: csv_name, gender: female_gender, credential: md_credential, email: "insideloop@draper.com", state: penn_state, country: us_country, street: "Seeds Street", city: "Seeds City").first_or_create
+      Physician.where( name: csv_name, gender: female_gender, credential: md_credential, email: "insideloop222@draper.com", state: penn_state, country: us_country, street: "Seeds Street", city: "Seeds City").first_or_create
 
     else
       Physician.where(name: csv_name, gender: female_gender, credential: do_credential, email: csv_email, state: penn_state, country: us_country, street: csv_street, city: csv_city).first_or_create
