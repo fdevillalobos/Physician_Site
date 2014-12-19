@@ -85,9 +85,9 @@ LIKE ? AND CAST(gender_id AS TEXT) LIKE ? AND (CAST(residency_hospital_id AS TEX
   # validates_presence_of :gender_id, :credential_id, :name # this won't check if gender_id is valid (i.e. exists in genders table)
   validates_presence_of :gender_id, :name
   validates :credential, presence: {message: "The credential does not exist"}
-  # validates_uniqueness_of :email
+  validates_uniqueness_of :email
   # Fairly nice Regex email validator that will ensure that your email has the correct formatting and at least could exist.
-  # validates_format_of :email, :with => /[a-z0-9!#$%&'*+\/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+\/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+(?:[A-Z]{2}|com|org|net|edu|gov|mil|biz|info|mobi|name|aero|asia|jobs|museum)\b/, :on => :create
+  validates_format_of :email, :with => /[a-z0-9!#$%&'*+\/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+\/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+(?:[A-Z]{2}|com|org|net|edu|gov|mil|biz|info|mobi|name|aero|asia|jobs|museum)\b/, :on => :create
 
   # Geocoder for Google Maps
   # Retrieve coordinates from field: address
