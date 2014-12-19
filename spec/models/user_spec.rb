@@ -22,9 +22,9 @@
 #  confirmation_token     :string(255)
 #  confirmed_at           :datetime
 #  confirmation_sent_at   :datetime
-#  ip                     :string(255)
-#  latitude               :float
-#  longitude              :float
+#  ip_address             :string(255)
+#  lat                    :float
+#  lon                    :float
 #
 
 require 'rails_helper'
