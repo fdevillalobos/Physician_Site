@@ -196,7 +196,7 @@ else
   end
 
 
-  Physician.where( name: "Donald Draper", gender: female_gender, credential: md_credential, email: "donald@draper.com", state: penn_state, country: us_country, street: "Seeds Street", city: "Seeds City").first_or_create
+  Physician.where( name: "Donald Draper", gender: female_gender, credential: md_credential, email: "crazyemailyo@draper.com", state: penn_state, country: us_country, street: "Seeds Street", city: "Seeds City").first_or_create
 end
 
 
