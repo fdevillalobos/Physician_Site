@@ -158,7 +158,7 @@ Given(/^I'm on the doctor search webpage$/) do
 end
 
 When(/^I search for a doctor who exists in the database$/) do
-  fill_in :search, :with => "bohnenkamp" # id for search field is  "search"
+  fill_in :search, :with => "DESALVO" # id for search field is  "search"
   click_button 'Search' # button's value is "Search"
 end
 

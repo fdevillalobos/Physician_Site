@@ -8,7 +8,9 @@ Scenario: Search for existing doctors
     Given doctors are in the database
     Given I'm on the doctor search webpage
     When I search for a doctor who exists in the database
+    Then show me the page
     Then I should see a list of doctors
+
 
 Scenario: Search for non-existing doctors
     Given doctors are in the database
