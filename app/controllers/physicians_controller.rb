@@ -7,13 +7,12 @@ class PhysiciansController < ApplicationController
 
   def index
     if params[:search]
+      puts "Make Basic Search"
       # @search_name = params[:search][:name]
       @physicians = Physician.search(params[:search]) #.order("name ASC")
       flash.now[:notice] = "Your search returned #{@physicians.size} results" #flash.now seems to fix the flash lasting for two page loads
       # Google Maps Representation of Physicians
-      puts "in index, there is a :search parameter"
       set_markers(@physicians)
-      puts @hash
       respond_with(@physicians)
     elsif params[:advsearch]
       puts "redirecting in index to adv_search because there is an :advsearch parameter"
@@ -21,10 +20,11 @@ class PhysiciansController < ApplicationController
     else
       @physicians = Physician.all.order('name ASC')
       # Google Maps Representation of Physicians
-      @hash = Gmaps4rails.build_markers(@physicians) do |physician, marker|
-        marker.lat physician.latitude
-        marker.lng physician.longitude
-      end
+      set_markers(@physicians)
+      # @hash = Gmaps4rails.build_markers(@physicians) do |physician, marker|
+      #   marker.lat physician.latitude
+      #   marker.lng physician.longitude
+      # end
       respond_with(@physicians)
     end
 

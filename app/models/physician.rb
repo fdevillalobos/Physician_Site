@@ -33,36 +33,33 @@ class Physician < ActiveRecord::Base
       # where("name LIKE ? OR country_id LIKE ?", "%#{query}%", "%#{query}%")
       # Physician.joins(:country).where("countries.name like ?", country)
       # joins(:country).where("countries.name like ? or physicians.name LIKE ?", "%#{query}%", "%#{query}%")
-
-      @no_join = Physician.where("name LIKE ? OR NPI LIKE ? OR phone LIKE ?", "%#{query}%", "%#{query}%", "%#{query}%")
-      @join = Physician.joins(:country, :state, :medical_school, :gender, :credential, :group_practice, :residency_hospital, :affiliation_hospital, :specialties)
-                .where("countries.name LIKE ? OR states.name LIKE ? OR medical_schools.name LIKE ? OR genders.sex LIKE ? OR credentials.name LIKE ? OR group_practices.name LIKE ? OR hospitals.name LIKE ? OR affiliation_hospitals_physicians.name LIKE ? OR specialties.name LIKE ?",
-                       "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%")
+      @text_fields     = Physician.where("name LIKE ? OR NPI LIKE ? OR phone LIKE ? OR email LIKE ?", "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%")
+      @address_fields  = Physician.joins(:country, :state).where("countries.name LIKE ? OR states.name LIKE ?", "%#{query}%", "%#{query}%")
+      @medicine_fields = Physician.joins(:medical_school, :credential, :specialties, :residency_hospital, :affiliation_hospital).where("medical_schools.name LIKE ? OR credentials.name LIKE ? OR specialties.name LIKE ? OR hospitals.name LIKE ? OR affiliation_hospitals_physicians.name LIKE ?", "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%")
+      # @other_fields    = Physician.joins(:group_practice).where("group_practices.name LIKE ?", "%#{query}%")
+      @other_fields    = Physician.joins(:gender, :group_practice).where("genders.sex LIKE ? OR group_practices.name LIKE ?", "%#{query}%", "%#{query}%")
     else
-      @no_join = Physician.where("name ILIKE ? OR CAST('NPI' AS TEXT) LIKE ? OR CAST(phone AS TEXT) LIKE ?", "%#{query}%", "%#{query}%", "%#{query}%")
-      @join = Physician.joins(:country, :state, :medical_school, :gender, :credential, :group_practice, :residency_hospital, :affiliation_hospital, :specialties)
-                  .where("countries.name ILIKE ? OR states.name ILIKE ? OR medical_schools.name ILIKE ? OR genders.sex ILIKE ? OR credentials.name ILIKE ? OR group_practices.name ILIKE ? OR hospitals.name ILIKE ? OR affiliation_hospitals_physicians.name ILIKE ? OR specialties.name ILIKE ?",
-                         "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%")
+      @text_fields     = Physician.where("name ILIKE ? OR CAST('NPI' AS TEXT) LIKE ? OR CAST(phone AS TEXT) LIKE ? OR email LIKE ?", "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%")
+      @address_fields  = Physician.joins(:country, :state).where("countries.name ILIKE ? OR states.name ILIKE ?", "%#{query}%", "%#{query}%")
+      @medicine_fields = Physician.joins(:medical_school, :credential, :specialties, :residency_hospital, :affiliation_hospital).where("medical_schools.name ILIKE ? OR credentials.name ILIKE ? OR specialties.name ILIKE ? OR hospitals.name ILIKE ? OR affiliation_hospitals_physicians.name ILIKE ?", "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%")
+      @other_fields    = Physician.joins(:gender, :group_practice).where("genders.sex ILIKE ? OR group_practices.name ILIKE ?", "%#{query}%", "%#{query}%")
     end
 
-    return (@no_join + @join).uniq #there has got to be a better and faster way of getting a unique answer to the user's query
+    return (@text_fields + @address_fields + @medicine_fields + @other_fields).uniq #there has got to be a better and faster way of getting a unique answer to the user's query
   end
 
   def self.advsearch(params)
     if Rails.env.development?
-      where("physicians.name LIKE ? AND country_id LIKE ? AND state_id LIKE ? AND medical_school_id LIKE ? AND gender_id LIKE ? AND \
-(residency_hospital_id LIKE ? OR affiliation_hospital_id LIKE ?)",
+      where("physicians.name LIKE ? AND country_id LIKE ? AND state_id LIKE ? AND medical_school_id LIKE ? AND gender_id LIKE ? AND (residency_hospital_id LIKE ? OR affiliation_hospital_id LIKE ?)",
                                "%#{params[:advsearch]}%", "%#{params[:country][:country_id]}%", "%#{params[:state][:state_id]}%",
                                "%#{params[:medical_school][:medical_school_id]}%", "%#{params[:gender][:gender_id]}%",
-                               "%#{params[:hospital][:hospital_id]}%", "%#{params[:hospital][:hospital_id]}%"
-      ).joins(:specialties).where("specialties.name LIKE ?", "%#{params[:specialtysearch]}%").uniq
+                               "%#{params[:hospital][:hospital_id]}%", "%#{params[:hospital][:hospital_id]}%") #.joins(:specialties).where("specialties.name LIKE ?", "%#{params[:specialtysearch]}%").uniq
     else
-      where("physicians.name ILIKE ? AND CAST(country_id AS TEXT) LIKE ? AND CAST(state_id AS TEXT) LIKE ? AND CAST(medical_school_id AS TEXT) \
-LIKE ? AND CAST(gender_id AS TEXT) LIKE ? AND (CAST(residency_hospital_id AS TEXT) LIKE ? OR CAST(affiliation_hospital_id AS TEXT) LIKE ?)",
+      where("physicians.name ILIKE ? AND CAST(country_id AS TEXT) LIKE ? AND CAST(state_id AS TEXT) LIKE ? AND CAST(medical_school_id AS TEXT) LIKE ? AND CAST(gender_id AS TEXT) LIKE ? AND (CAST(residency_hospital_id AS TEXT) LIKE ? OR CAST(affiliation_hospital_id AS TEXT) LIKE ?)",
             "%#{params[:advsearch]}%", "%#{params[:country][:country_id]}%", "%#{params[:state][:state_id]}%",
             "%#{params[:medical_school][:medical_school_id]}%", "%#{params[:gender][:gender_id]}%",
             "%#{params[:hospital][:hospital_id]}%", "%#{params[:hospital][:hospital_id]}%"
-      ).joins(:specialties).where("specialties.name ILIKE ?", "%#{params[:specialtysearch]}%").uniq
+      ).joins(:specialties).where("specialties.name ILIKE ?", "%#{params[:specialtysearch]}%") #.uniq
     end
   end
 
@@ -95,6 +92,14 @@ LIKE ? AND CAST(gender_id AS TEXT) LIKE ? AND (CAST(residency_hospital_id AS TEX
   geocoded_by :address                # can also be an IP address
   after_validation :geocode          # auto-fetch coordinates
 
+  before_save :default_values
+
+  # How to create default values for incomplete fields
+  def default_values
+    self.group_practice ||= GroupPractice.find_by_name('_')
+  end
+
+  # Address for Geocode
   def address
     if country.nil?
       ctry = ''
