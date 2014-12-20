@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141219221938) do
+ActiveRecord::Schema.define(version: 20141220002305) do
 
   create_table "countries", force: true do |t|
     t.string   "name"
@@ -89,6 +89,8 @@ ActiveRecord::Schema.define(version: 20141219221938) do
     t.text     "street"
     t.text     "suite"
     t.text     "city"
+    t.string   "surname"
+    t.float    "score"
   end
 
   add_index "physicians", ["affiliation_hospital_id"], name: "index_physicians_on_affiliation_hospital_id"
@@ -159,6 +161,7 @@ ActiveRecord::Schema.define(version: 20141219221938) do
     t.string   "ip_address"
     t.float    "lat"
     t.float    "lon"
+    t.string   "surname"
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true

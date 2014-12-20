@@ -23,6 +23,7 @@
 #  street                  :text
 #  suite                   :text
 #  city                    :text
+#  surname                 :string(255)
 #
 
 class Physician < ActiveRecord::Base
@@ -113,6 +114,29 @@ class Physician < ActiveRecord::Base
     end
 
     [street, city, sta, ctry].compact.join(', ')
+  end
+
+  def full_name
+    if surname
+      return name + ' ' + surname
+    else
+      return name
+    end
+  end
+
+  def avg_score
+    if self.reviews.empty?
+      update_attribute(:score, 0)
+      return 0
+    else
+      @total_score = 0.0
+      self.reviews.each do |review|
+        @total_score += review.overall_score
+      end
+      # self.score=
+      update_attribute(:score, @total_score.to_f/self.reviews.size)
+      return @total_score.to_f/self.reviews.size
+    end
   end
 
 end

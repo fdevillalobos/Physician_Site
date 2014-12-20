@@ -30,3 +30,4 @@ jQuery ->
     else
       $('#physician_state_id').empty()
       $('#physician_state_id').parent().parent().hide()
+

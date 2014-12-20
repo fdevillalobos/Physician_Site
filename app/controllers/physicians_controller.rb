@@ -4,6 +4,7 @@ class PhysiciansController < ApplicationController
   before_action :set_guest
 
   respond_to :html
+  @@order = 'ASC'
 
   def index
     if params[:search]
@@ -18,18 +19,20 @@ class PhysiciansController < ApplicationController
     elsif params[:advsearch]
       puts "redirecting in index to adv_search because there is an :advsearch parameter"
       redirect_to action: :adv_search, params: params
+
+    elsif params[:order]
+      @physicians = Physician.all.order("#{params[:order][0]} #{params[:order][1]}, country_id ASC")
+      set_markers(@physicians)
+      respond_with(@physicians)
+
     else
       @physicians = Physician.all.order('name ASC')
+
       # Google Maps Representation of Physicians
       set_markers(@physicians)
-      # @hash = Gmaps4rails.build_markers(@physicians) do |physician, marker|
-      #   marker.lat physician.latitude
-      #   marker.lng physician.longitude
-      # end
-      # puts @hash
-      puts "Remote IP: ",current_user.ip
-      puts "Latitude: ",current_user.latitude
-      puts "Longitude: ",current_user.longitude
+      puts "Remote IP: ",current_user.ip_address
+      puts "Latitude: ",current_user.lat
+      puts "Longitude: ",current_user.lon
       respond_with(@physicians)
     end
 
@@ -98,11 +101,13 @@ class PhysiciansController < ApplicationController
       unless current_user
         @current_user = User.find_by_email("guest@guest.com")
       end
-      current_user.ip = request.remote_ip
+      current_user.ip_address = request.remote_ip
       current_user.save
     end
 
     def physician_params
-      params.require(:physician).permit(:name, :email, :country_id, :state_id, :specialty_id, :medical_school_id, :NPI, :gender_id, :birth, :phone, :residency_hospital_id, :affiliation_hospital_id, :credential_id, :group_practice_id, :specialties)
+      params.require(:physician).permit(:name, :email, :country_id, :state_id, :specialty_id, :medical_school_id, :NPI,
+                                        :gender_id, :birth, :phone, :residency_hospital_id, :affiliation_hospital_id,
+                                        :credential_id, :group_practice_id, :specialties, :surname, :city, :suite)
     end
 end

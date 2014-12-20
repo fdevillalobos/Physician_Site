@@ -23,6 +23,7 @@
 #  street                  :text
 #  suite                   :text
 #  city                    :text
+#  surname                 :string(255)
 #
 
 require 'rails_helper'

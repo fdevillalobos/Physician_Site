@@ -25,6 +25,7 @@
 #  ip_address             :string(255)
 #  lat                    :float
 #  lon                    :float
+#  surname                :string(255)
 #
 
 FactoryGirl.define do

@@ -2,123 +2,176 @@
 <%= form_for @physician, :html => { :class => "form-horizontal physician" } do |f| %>
 
     <% if @physician.errors.any? %>
-    <div id="error_expl" class="panel panel-danger">
-      <div class="panel-heading">
-        <h3 class="panel-title"><%= pluralize(@physician.errors.count, "error") %> prohibited this physician from being saved:</h3>
+        <div id="error_expl" class="panel panel-danger">
+          <div class="panel-heading">
+            <h3 class="panel-title"><%= pluralize(@physician.errors.count, "error") %> prohibited this physician from being saved:</h3>
+          </div>
+          <div class="panel-body">
+            <ul>
+              <% @physician.errors.full_messages.each do |msg| %>
+                  <li><%= msg %></li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+    <% end %>
+
+    <!--Personal Information-->
+    <div class="container">
+      <%= f.label :personal_information, :class => 'control-label' %>
+      <div class="row">
+        <div class="col-md-3 control-group ">
+          <!--<%= f.label :personal_information, :class => 'control-label' %>-->
+          <div class="controls">
+            <%= f.text_field :name, :class => 'form-control', :placeholder => "Name" %>
+          </div>
+          <%= error_span(@physician[:name]) %>
+        </div>
+        <div class="col-md-3 control-group">
+          <!--<%= f.label :surname, :class => 'control-label' %>-->
+          <div class="controls">
+            <%= f.text_field :surname, :class => 'form-control', :placeholder => "Surname" %>
+          </div>
+          <%= error_span(@physician[:surname]) %>
+        </div>
+        <div class="col-md-3 control-group">
+          <!--<%= f.label :email, :class => 'control-label' %>-->
+          <div class="controls">
+            <%= f.text_field :email, :class => 'form-control', :placeholder => "email" %>
+          </div>
+          <%= error_span(@physician[:email]) %>
+        </div>
       </div>
-      <div class="panel-body">
-        <ul>
-        <% @physician.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-        </ul>
+      <div class="row up_space">
+        <div class="col-md-3 control-group">
+          <!--<%= f.label :gender_id, :class => 'control-label' %>-->
+          <div class="controls">
+            <%= f.collection_select :gender_id, Gender.all, :id, :sex, {prompt: "Select a Gender"}, {class: 'form-control'} %>
+          </div>
+          <%= error_span(@physician[:gender_id]) %>
+        </div>
+
+        <!--Try and use bootstrap-datepicker.js instead here-->
+        <div class="col-md-3 control-group">
+          <!--<%= f.label :birth, :class => 'control-label' %>-->
+          <div class="controls">
+            <%= f.date_select :birth, :class => 'form-control' %>
+          </div>
+        </div>
+
+        <div class="col-md-3 control-group">
+          <!--<%= f.label :phone, :class => 'control-label' %>-->
+          <div class="controls">
+            <%= f.text_field :phone, :class => 'form-control', :placeholder => "Phone Number" %>
+          </div>
+          <%= error_span(@physician[:phone]) %>
+        </div>
       </div>
     </div>
-  <% end %>
 
-  <div class="control-group">
-    <%= f.label :name, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :name, :class => 'form-control' %>
-    </div>
-    <%= error_span(@physician[:name]) %>
-  </div>
-  <div class="control-group">
-    <%= f.label :email, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :email, :class => 'form-control' %>
-    </div>
-    <%= error_span(@physician[:email]) %>
-  </div>
-  <div class="control-group">
-    <%= f.label :country_id, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.collection_select :country_id, Country.all, :id, :name, {prompt: "Select a Country"}, {class: 'form-control'} %>
-    </div>
-    <%= error_span(@physician[:country_id]) %>
-  </div>
-  <div class="control-group">
-    <%= f.label :state_id, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.grouped_collection_select :state_id, Country.all, :states, :name, :id, :name, {prompt: "Select a State"}, {class: 'form-control'} %>
-    </div>
-    <%= error_span(@physician[:state_id]) %>
-  </div>
-  <div class="control-group">
-    <%= f.label :medical_school_id, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.collection_select :medical_school_id, MedicalSchool.all, :id, :name, {prompt: "Select a Medical School"}, {class: 'form-control'} %>
-    </div>
-    <%= error_span(@physician[:medical_school_id]) %>
-  </div>
-  <div class="control-group">
-    <%= f.label :NPI, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :NPI, :class => 'form-control' %>
-    </div>
-    <%= error_span(@physician[:NPI]) %>
-  </div>
-  <div class="control-group">
-    <%= f.label :gender_id, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.collection_select :gender_id, Gender.all, :id, :sex, {prompt: "Select a Gender"}, {class: 'form-control'} %>
-    </div>
-    <%= error_span(@physician[:gender_id]) %>
-  </div>
-  <div class="control-group">
-    <%= f.label :birth, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :birth, :class => 'form-control' %>
-    </div>
-    <%= error_span(@physician[:birth]) %>
-  </div>
-  <div class="control-group">
-    <%= f.label :phone, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :phone, :class => 'form-control' %>
-    </div>
-    <%= error_span(@physician[:phone]) %>
-  </div>
-  <div class="control-group">
-    <%= f.label :residency_hospital_id, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.collection_select :residency_hospital_id, Hospital.all, :id, :name, {prompt: "Select a Residency Hospital"}, {class: 'form-control'} %>
-    </div>
-    <%= error_span(@physician[:residency_hospital_id]) %>
-  </div>
-  <div class="control-group">
-    <%= f.label :affiliation_hospital_id, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.collection_select :affiliation_hospital_id, Hospital.all, :id, :name, {prompt: "Select an Affiliation Hospital"}, {class: 'form-control'} %>
-    </div>
-    <%= error_span(@physician[:affiliation_hospital_id]) %>
-  </div>
-  <div class="control-group">
-    <%= f.label :credential_id, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.collection_select :credential_id, Credential.all, :id, :name, {prompt: "Select a Credential"}, {class: 'form-control'} %>
-    </div>
-    <%= error_span(@physician[:credential_id]) %>
-  </div>
-  <div class="control-group">
-    <%= f.label :group_practice_id, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.collection_select :group_practice_id, GroupPractice.all, :id, :name, {prompt: "Select a Group Practice"}, {class: 'form-control'} %>
-    </div>
-    <%= error_span(@physician[:group_practice_id]) %>
-  </div>
-    <div class="control-group">
-      <%= f.label :specialties, :class => 'control-label' %>
-      <div class="controls">
-        <%= f.collection_select :specialties, Specialty.all, :id, :name, {}, {:multiple => true, class: 'form-control'} %>
+    <!--Address-->
+    <div class="container up_space">
+      <%= f.label :address_information, :class => 'control-label' %>
+      <div class="row">
+        <div class="col-md-3 control-group">
+          <!--<%= f.label :country_id, :class => 'control-label' %>-->
+          <div class="controls">
+            <%= f.collection_select :country_id, Country.all, :id, :name, {prompt: "Select a Country"}, {class: 'form-control'} %>
+          </div>
+          <%= error_span(@physician[:country_id]) %>
+        </div>
+        <div class="col-md-3 control-group">
+          <!--<%= f.label :state_id, :class => 'control-label' %>-->
+          <div class="controls">
+            <%= f.grouped_collection_select :state_id, Country.all, :states, :name, :id, :name, {prompt: "Select a State"}, {class: 'form-control'} %>
+          </div>
+          <%= error_span(@physician[:state_id]) %>
+        </div>
       </div>
-      <%= error_span(@physician[:group_practice_id]) %>
+      <div class="row up_space">
+        <div class="col-md-3 control-group">
+          <!--<%= f.label :city, :class => 'control-label' %>-->
+          <div class="controls">
+            <%= f.text_field :city, :class => 'form-control', :placeholder => "City" %>
+          </div>
+          <%= error_span(@physician[:city]) %>
+        </div>
+        <div class="col-md-3 control-group">
+          <!--<%= f.label :suite, :class => 'control-label' %>-->
+          <div class="controls">
+            <%= f.text_field :suite, :class => 'form-control', :placeholder => "Suite" %>
+          </div>
+          <%= error_span(@physician[:suite]) %>
+        </div>
+      </div>
     </div>
 
-  <div style="margin-top: 20px"></div>
+    <!--Professional Information-->
+    <div class="container up_space">
+      <%= f.label :professional_information, :class => 'control-label' %>
+      <div class="row">
+        <div class="col-md-3 control-group">
+          <!--<%= f.label :medical_school_id, :class => 'control-label' %>-->
+          <div class="controls">
+            <%= f.collection_select :medical_school_id, MedicalSchool.all, :id, :name, {prompt: "Select a Medical School"}, {class: 'form-control'} %>
+          </div>
+          <%= error_span(@physician[:medical_school_id]) %>
+        </div>
+        <div class="col-md-3 control-group">
+          <!--<%= f.label :NPI, :class => 'control-label' %>-->
+          <div class="controls">
+            <%= f.text_field :NPI, :class => 'form-control', :placeholder => "Enter NPI number" %>
+          </div>
+          <%= error_span(@physician[:NPI]) %>
+        </div>
+        <div class="control-group">
+          <!--<%= f.label :credential_id, :class => 'control-label' %>-->
+          <div class="col-md-3 controls">
+            <%= f.collection_select :credential_id, Credential.all, :id, :name, {prompt: "Select a Credential"}, {class: 'form-control'} %>
+          </div>
+          <%= error_span(@physician[:credential_id]) %>
+        </div>
+      </div>
+      <div class="row up_space">
+        <div class="col-md-3 control-group">
+          <!--<%= f.label :residency_hospital_id, :class => 'control-label' %>-->
+          <div class="controls">
+            <%= f.collection_select :residency_hospital_id, Hospital.all, :id, :name, {prompt: "Select a Residency Hospital"}, {class: 'form-control'} %>
+          </div>
+          <%= error_span(@physician[:residency_hospital_id]) %>
+        </div>
+        <div class="col-md-3 control-group">
+          <!--<%= f.label :affiliation_hospital_id, :class => 'control-label' %>-->
+          <div class="controls">
+            <%= f.collection_select :affiliation_hospital_id, Hospital.all, :id, :name, {prompt: "Select an Affiliation Hospital"}, {class: 'form-control'} %>
+          </div>
+          <%= error_span(@physician[:affiliation_hospital_id]) %>
+        </div>
+        <div class="col-md-3 control-group">
+          <!--<%= f.label :group_practice_id, :class => 'control-label' %>-->
+          <div class="controls">
+            <%= f.collection_select :group_practice_id, GroupPractice.all, :id, :name, {prompt: "Select a Group Practice"}, {class: 'form-control'} %>
+          </div>
+          <%= error_span(@physician[:group_practice_id]) %>
+        </div>
+      </div>
+      <div class="row up_space">
+        <div class="col-md-3 control-group">
+          <%= f.label :specialties, :class => 'control-label' %>
+          <div class="controls">
+            <%= f.collection_select :specialties, Specialty.all, :id, :name, {}, {:multiple => true, class: 'form-control'} %>
+          </div>
+          <%= error_span(@physician[:group_practice_id]) %>
+        </div>
+      </div>
+    </div>
 
-  <%= f.submit nil, :class => 'btn btn-primary' %>
-  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-            physicians_path, :class => 'btn btn-default' %>
 
+    <div class="container up_space">
+      <div class="row">
+        <%= f.submit nil, :class => 'btn btn-primary' %>
+        <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                    physicians_path, :class => 'btn btn-default' %>
+      </div>
+    </div>
 <% end %>

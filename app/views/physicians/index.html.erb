@@ -55,8 +55,8 @@
       <thead>
       <tr>
         <!--<th><%= model_class.human_attribute_name(:id) %></th>-->
-        <th><%= model_class.human_attribute_name(:name) %></th>
-        <th><%= model_class.human_attribute_name(:email) %></th>
+        <th><%= link_to model_class.human_attribute_name(:name), {controller: "physicians", action: "index", order: ['surname', 'ASC'] } %></th>
+        <!--<th><%= model_class.human_attribute_name(:email) %></th>-->
         <th><%= model_class.human_attribute_name(:country_id) %></th>
         <th><%= model_class.human_attribute_name(:state_id) %></th>
         <th><%= model_class.human_attribute_name(:medical_school_id) %></th>
@@ -69,6 +69,7 @@
         <th><%= model_class.human_attribute_name(:credential_id) %></th>
         <th><%= model_class.human_attribute_name(:group_practice_id) %></th>
         <th><%= model_class.human_attribute_name(:specialties) %></th>
+        <th><%= link_to model_class.human_attribute_name(:avg_score), {controller: "physicians", action: "index", order: ['score', 'DESC'] } %></th>
         <!--<th><%= model_class.human_attribute_name(:created_at) %></th>-->
         <% if current_user && current_user.admin? %> <th><%=t '.actions', :default => t("helpers.actions") %></th><% end %>
       </tr>
@@ -77,8 +78,8 @@
       <% @physicians.each do |physician| %>
           <tr>
             <!--<td><%= link_to physician.id, physician_path(physician) %></td>-->
-            <td><%= link_to physician.name, physician_path(physician) %></td>
-            <td><%= physician.email %></td>
+            <td><%= link_to physician.full_name, physician_path(physician) %></td>
+            <!--<td><%= physician.email %></td>-->
             <td><%= physician.country.name unless physician.country.nil? %></td>
             <td><%= physician.state.name unless physician.state.nil? %></td>
             <td><%= physician.medical_school.name unless physician.medical_school.nil? %></td>
@@ -91,6 +92,7 @@
             <td><%= physician.credential.name %></td>
             <td><%= physician.group_practice.name unless physician.group_practice.nil? %></td>
             <td><%= physician.specialties.select(:name).map(&:name).join(', ') %></td>
+            <td><%= physician.avg_score %></td>
             <!--<td><%= physician.created_at.to_formatted_s(:short) %></td>-->
             <% if current_user && current_user.admin?  %>
                 <td>

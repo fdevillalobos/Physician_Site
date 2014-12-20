@@ -18,3 +18,7 @@
 //= require gmaps/google
 //= require_tree .
 
+$(function () {
+    $('#datetimepicker6').datetimepicker();
+});
+
