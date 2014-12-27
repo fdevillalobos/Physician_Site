@@ -50,6 +50,23 @@
     </div>
   </div>
 
+<script type="text/javascript">
+    handler = Gmaps.build('Google');
+    handler.buildMap({
+                provider: { zoom: 5 },
+                internal: { id: 'map' }
+            },
+            function(){
+                markers = handler.addMarkers(<%=raw @hash.to_json %>);
+//                console.log();
+                handler.bounds.extendWith(markers);
+                handler.fitMapToBounds();
+//                handler.map.centerOn({ lat: 40, lng: 5 })
+            });
+//    handler.setZoom(10);
+</script>
+
+
   <div class="container-fluid up_space">
     <table class="table table-striped">
       <thead>
