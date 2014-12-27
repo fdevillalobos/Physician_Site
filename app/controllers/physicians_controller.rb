@@ -93,6 +93,8 @@ class PhysiciansController < ApplicationController
       @hash = Gmaps4rails.build_markers(physicians) do |physician, marker|
         marker.lat physician.latitude
         marker.lng physician.longitude
+        marker.infowindow physician.name + ": " + physician.address
+        marker.json({ title: physician.name })
       end
       # puts @hash
     end

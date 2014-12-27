@@ -44,6 +44,12 @@
   <dd><%= @physician.longitude %></dd>
 </dl>
 
+<!--Google Maps API Gem-->
+<div style='width: 800px;'>
+  <div id="map" style='width: 800px; height: 400px;'></div>
+</div>
+
+<!-- the below script appears also in index.html.erb - not DRY -->
 <!--Google Maps Javascript-->
 <script type="text/javascript">
     handler = Gmaps.build('Google');
@@ -61,10 +67,7 @@
 //    handler.setZoom(10);
 </script>
 
-<!--Google Maps API Gem-->
-<div style='width: 800px;'>
-  <div id="map" style='width: 800px; height: 400px;'></div>
-</div>
+
 
 <%= render :partial => 'reviews' %>
 

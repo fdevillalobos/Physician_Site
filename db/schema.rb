@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141220002305) do
+ActiveRecord::Schema.define(version: 20141227194634) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -79,10 +79,10 @@ ActiveRecord::Schema.define(version: 20141220002305) do
     t.datetime "updated_at"
     t.integer  "state_id"
     t.integer  "medical_school_id"
-    t.integer  "NPI"
+    t.integer  "NPI",                     limit: 8
     t.integer  "gender_id"
     t.date     "birth"
-    t.integer  "phone"
+    t.string   "phone"
     t.integer  "residency_hospital_id"
     t.integer  "affiliation_hospital_id"
     t.integer  "credential_id"
