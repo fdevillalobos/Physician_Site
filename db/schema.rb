@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20141220002305) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "countries", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
@@ -40,7 +43,7 @@ ActiveRecord::Schema.define(version: 20141220002305) do
     t.datetime "updated_at"
   end
 
-  add_index "group_practices", ["speciality_id"], name: "index_group_practices_on_speciality_id"
+  add_index "group_practices", ["speciality_id"], name: "index_group_practices_on_speciality_id", using: :btree
 
   create_table "hospitals", force: true do |t|
     t.string   "name"
@@ -50,7 +53,7 @@ ActiveRecord::Schema.define(version: 20141220002305) do
     t.datetime "updated_at"
   end
 
-  add_index "hospitals", ["state_id"], name: "index_hospitals_on_state_id"
+  add_index "hospitals", ["state_id"], name: "index_hospitals_on_state_id", using: :btree
 
   create_table "medical_schools", force: true do |t|
     t.string   "name"
@@ -60,7 +63,7 @@ ActiveRecord::Schema.define(version: 20141220002305) do
     t.datetime "updated_at"
   end
 
-  add_index "medical_schools", ["state_id"], name: "index_medical_schools_on_state_id"
+  add_index "medical_schools", ["state_id"], name: "index_medical_schools_on_state_id", using: :btree
 
   create_table "months", force: true do |t|
     t.string   "name"
@@ -93,22 +96,22 @@ ActiveRecord::Schema.define(version: 20141220002305) do
     t.float    "score"
   end
 
-  add_index "physicians", ["affiliation_hospital_id"], name: "index_physicians_on_affiliation_hospital_id"
-  add_index "physicians", ["country_id"], name: "index_physicians_on_country_id"
-  add_index "physicians", ["credential_id"], name: "index_physicians_on_credential_id"
-  add_index "physicians", ["gender_id"], name: "index_physicians_on_gender_id"
-  add_index "physicians", ["group_practice_id"], name: "index_physicians_on_group_practice_id"
-  add_index "physicians", ["medical_school_id"], name: "index_physicians_on_medical_school_id"
-  add_index "physicians", ["residency_hospital_id"], name: "index_physicians_on_residency_hospital_id"
-  add_index "physicians", ["state_id"], name: "index_physicians_on_state_id"
+  add_index "physicians", ["affiliation_hospital_id"], name: "index_physicians_on_affiliation_hospital_id", using: :btree
+  add_index "physicians", ["country_id"], name: "index_physicians_on_country_id", using: :btree
+  add_index "physicians", ["credential_id"], name: "index_physicians_on_credential_id", using: :btree
+  add_index "physicians", ["gender_id"], name: "index_physicians_on_gender_id", using: :btree
+  add_index "physicians", ["group_practice_id"], name: "index_physicians_on_group_practice_id", using: :btree
+  add_index "physicians", ["medical_school_id"], name: "index_physicians_on_medical_school_id", using: :btree
+  add_index "physicians", ["residency_hospital_id"], name: "index_physicians_on_residency_hospital_id", using: :btree
+  add_index "physicians", ["state_id"], name: "index_physicians_on_state_id", using: :btree
 
   create_table "physicians_specialties", id: false, force: true do |t|
     t.integer "physician_id", null: false
     t.integer "specialty_id", null: false
   end
 
-  add_index "physicians_specialties", ["physician_id", "specialty_id"], name: "index_physicians_specialties_on_physician_id_and_specialty_id"
-  add_index "physicians_specialties", ["specialty_id", "physician_id"], name: "index_physicians_specialties_on_specialty_id_and_physician_id"
+  add_index "physicians_specialties", ["physician_id", "specialty_id"], name: "index_physicians_specialties_on_physician_id_and_specialty_id", using: :btree
+  add_index "physicians_specialties", ["specialty_id", "physician_id"], name: "index_physicians_specialties_on_specialty_id_and_physician_id", using: :btree
 
   create_table "reviews", force: true do |t|
     t.integer  "overall_score"
@@ -119,8 +122,8 @@ ActiveRecord::Schema.define(version: 20141220002305) do
     t.datetime "updated_at"
   end
 
-  add_index "reviews", ["physician_id"], name: "index_reviews_on_physician_id"
-  add_index "reviews", ["user_id"], name: "index_reviews_on_user_id"
+  add_index "reviews", ["physician_id"], name: "index_reviews_on_physician_id", using: :btree
+  add_index "reviews", ["user_id"], name: "index_reviews_on_user_id", using: :btree
 
   create_table "specialties", force: true do |t|
     t.string   "name"
@@ -136,7 +139,7 @@ ActiveRecord::Schema.define(version: 20141220002305) do
     t.integer  "country_id"
   end
 
-  add_index "states", ["country_id"], name: "index_states_on_country_id"
+  add_index "states", ["country_id"], name: "index_states_on_country_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -164,9 +167,9 @@ ActiveRecord::Schema.define(version: 20141220002305) do
     t.string   "surname"
   end
 
-  add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   create_table "zip_codes", force: true do |t|
     t.integer  "zip"
@@ -175,6 +178,6 @@ ActiveRecord::Schema.define(version: 20141220002305) do
     t.datetime "updated_at"
   end
 
-  add_index "zip_codes", ["state_id"], name: "index_zip_codes_on_state_id"
+  add_index "zip_codes", ["state_id"], name: "index_zip_codes_on_state_id", using: :btree
 
 end

@@ -92,7 +92,8 @@ end
 
 
 
-if Rails.env.development?
+# if Rails.env.development?
+if 5==3
   # female_gender = Gender.find(14)
   # male_gender = Gender.find(13)
   # md_credential = Credential.find(9)

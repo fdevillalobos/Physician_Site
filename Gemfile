@@ -52,7 +52,8 @@ group :development, :test do
   gem 'database_cleaner'
   gem 'capybara'                              # Fill in forms automatically.
   gem 'launchy'                               # Use launchy to start processes and applications.
-  gem 'sqlite3'
+  # gem 'sqlite3'
+  gem 'pg'
   gem 'simplecov', :require => false
 end
 group :production do

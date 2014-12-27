@@ -29,7 +29,8 @@
 class Physician < ActiveRecord::Base
 
   def self.search(query)
-    if (Rails.env.development? or Rails.env.test?)
+    # if (Rails.env.development? or Rails.env.test?)
+    if 5==3
       # query[:name]
       # where("name LIKE ? OR country_id LIKE ?", "%#{query}%", "%#{query}%")
       # Physician.joins(:country).where("countries.name like ?", country)
