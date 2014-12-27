@@ -4168,7 +4168,7 @@ penn_state = State.find_by_name('Pennsylvania')
 us_country = Country.find_by_name('United States')
 
 row_iter = 0
-max_row = 1000
+max_row = 50
 CSV.foreach("physician_input first_1000.csv") do |row|
   row_iter += 1
   if row_iter > max_row then break end
