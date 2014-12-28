@@ -4159,7 +4159,7 @@ State.where(:id=>3807,:iso=>"10",:name=>"Harare Province",:country_id=>249).firs
 
 
 
-sleep(1.0/50.0)
+
 female_gender = Gender.find_by_sex('Female')
 male_gender = Gender.find_by_sex('Male')
 md_credential = Credential.find_by_name('MD')
@@ -4170,6 +4170,7 @@ us_country = Country.find_by_name('United States')
 row_iter = 0
 max_row = 50
 CSV.foreach("physician_input first_1000.csv") do |row|
+  sleep(1.0/50.0)
   row_iter += 1
   if row_iter > max_row then break end
   if row_iter == 1 then next end
